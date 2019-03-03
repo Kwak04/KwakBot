@@ -274,22 +274,29 @@ async def on_message(message):
 
         await client.send_message(message.channel, "가위바위보 중에 고르세요!")
         gbb_user = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
-        gbb_user = gbb_user.content
-        gbb_list = ["가위", "바위", "보"]
-        gbb_com = random.choice(gbb_list)
-
-        if gbb_user not in gbb_list:
-            gbb = "이상한 거 내지 말라구욧!"
-        if (gbb_user == "가위" and gbb_com == "보") or (gbb_user == "바위" and gbb_com == "가위") or (gbb_user == "보" and gbb_com == "바위"):
-            gbb = "<@%s>님이 이겼네요! 축하해요~" % message.author.id
-        if (gbb_user == "가위" and gbb_com == "바위") or (gbb_user == "바위" and gbb_com == "보") or (gbb_user == "보" and gbb_com == "가위"):
-            gbb = "<@%s>님이 졌네요..." % message.author.id
-        if gbb_user == gbb_com:
-            gbb = "비겼네요. ㅎㅎ"
 
         if gbb_user is None:
-            await client.send_message(message.channel, "왜 안고르세요? ㅡㅡ")
+            gbb_timeover_embed = discord.Embed(
+                title="시간이 지났습니다.",
+                description="왜 안 고르세요? :(",
+                color=0xff0000
+            )
+            await client.send_message(message.channel, embed=gbb_timeover_embed)
+
         else:
+            gbb_user = gbb_user.content
+            gbb_list = ["가위", "바위", "보"]
+            gbb_com = random.choice(gbb_list)
+
+            if gbb_user not in gbb_list:
+                gbb = "이상한 거 내지 말라구욧!"
+            if (gbb_user == "가위" and gbb_com == "보") or (gbb_user == "바위" and gbb_com == "가위") or (gbb_user == "보" and gbb_com == "바위"):
+                gbb = "<@%s>님이 이겼네요! 축하해요~" % message.author.id
+            if (gbb_user == "가위" and gbb_com == "바위") or (gbb_user == "바위" and gbb_com == "보") or (gbb_user == "보" and gbb_com == "가위"):
+                gbb = "<@%s>님이 졌네요..." % message.author.id
+            if gbb_user == gbb_com:
+                gbb = "비겼네요. ㅎㅎ"
+
             gbb_embed = discord.Embed(
                 title="콱봇의 선택 : %s" % gbb_com,
                 description=gbb,
@@ -305,7 +312,13 @@ async def on_message(message):
         hnp_user_input = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
 
         if hnp_user_input is None:
-            await client.send_message(message.channel, "왜 안고르세요? ㅡㅡ")
+            hnp_timeover_embed_middle = discord.Embed(
+                title="시간이 지났습니다.",
+                description="왜 안 고르세요? :(",
+                color=0xff0000
+            )
+            client.send_message(message.channel, embed=hnp_timeover_embed_middle)
+
         else:
             hnp_user_input = hnp_user_input.content.split()
             hnp_user1, hnp_user2 = hnp_user_input[0], hnp_user_input[1]
@@ -321,17 +334,18 @@ async def on_message(message):
             await client.send_message(message.channel, embed=hnp_embed_middle)
 
             hnp_user = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
-            hnp_user = hnp_user.content
-            hnp_com = random.choice([hnp_com1, hnp_com2])
 
             if hnp_user is None:
-                hnp_none_embed = discord.Embed(
+                hnp_timeover_embed = discord.Embed(
                     title="시간이 지났습니다.",
-                    description="왜 안 고르세요? ㅡㅡ",
+                    description="왜 안 고르세요? :(",
                     color=0xff0000
                 )
-                await client.send_message(message.channel, embed=hnp_none_embed)
+                await client.send_message(message.channel, embed=hnp_timeover_embed)
             else:
+                hnp_user = hnp_user.content
+                hnp_com = random.choice([hnp_com1, hnp_com2])
+
                 if hnp_user not in hnp_list:
                     hnp = "이상한 거 내지 말라구욧!"
                 if (hnp_user == "가위" and hnp_com == "보") or (hnp_user == "바위" and hnp_com == "가위") or (hnp_user == "보" and hnp_com == "바위"):
