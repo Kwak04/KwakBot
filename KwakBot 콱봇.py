@@ -8,6 +8,7 @@ import discord
 import random
 import requests
 import json
+import openpyxl
 
 
 # 준비
@@ -370,8 +371,7 @@ async def on_message(message):
         await client.add_reaction(msg, "✌")
         await client.add_reaction(msg, "🖐")
         res = await client.wait_for_reaction(["✊", "✌", "🖐"], message=message, timeout=5, user=message.author)
-        # await client.send_message(message.channel, res)
-        print(res)
+        await client.send_message(message.channel, "{0.reaction.emoji}".format(res))
 
 
 
