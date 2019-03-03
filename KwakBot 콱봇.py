@@ -325,7 +325,12 @@ async def on_message(message):
             hnp_com = random.choice([hnp_com1, hnp_com2])
 
             if hnp_user is None:
-                await client.send_message(message.channel, "왜 안고르세요? ㅡㅡ")
+                hnp_none_embed = discord.Embed(
+                    title="시간이 지났습니다.",
+                    description="왜 안 고르세요? ㅡㅡ",
+                    color=0xff0000
+                )
+                await client.send_message(message.channel, embed=hnp_none_embed)
             else:
                 if hnp_user not in hnp_list:
                     hnp = "이상한 거 내지 말라구욧!"
@@ -351,8 +356,8 @@ async def on_message(message):
         await client.add_reaction(msg, "✌")
         await client.add_reaction(msg, "🖐")
         res = await client.wait_for_reaction(["✊", "✌", "🖐"], message=message, timeout=5, user=message.author)
-        await client.send_message(message.channel, res)
-
+        # await client.send_message(message.channel, res)
+        print(res)
 
 
 
