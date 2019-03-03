@@ -343,15 +343,15 @@ async def on_message(message):
                 )
                 await client.send_message(message.channel, embed=hnp_embed)
 
-    if message.content == "콱봇 테스트":
-        await client.send_message(message.channel, "아무거나 입력하세요.")
-        await client.wait_for_message(timeout=10, author=message.author, channel=message.channel)
-        msg = await client.send_message(message.channel, "아래 중 하나를 선택하세요.")
-        await client.add_reaction(msg, ":fist:")
-        await client.add_reaction(msg, ":v:")
-        await client.add_reaction(msg, ":hand_splayed:")
-        res = await client.wait_for_reaction([":fist:", ":v:", ":hand_splayed:"], message=message, timeout=5, user=message.author)
-        await client.send_message(message.channel, res)
+    # if message.content == "콱봇 테스트":
+    #     await client.send_message(message.channel, "아무거나 입력하세요.")
+    #     await client.wait_for_message(timeout=10, author=message.author, channel=message.channel)
+    #     msg = await client.send_message(message.channel, "아래 중 하나를 선택하세요.")
+    #     await client.add_reaction(msg, ":fist:")
+    #     await client.add_reaction(msg, ":v:")
+    #     await client.add_reaction(msg, ":hand_splayed:")
+    #     res = await client.wait_for_reaction([":fist:", ":v:", ":hand_splayed:"], message=message, timeout=5, user=message.author)
+    #     await client.send_message(message.channel, res)
 
 
 
