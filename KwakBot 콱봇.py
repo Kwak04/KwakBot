@@ -390,7 +390,7 @@ async def on_message(message):
     if message.content == "콱봇 사이트 목록":
         site_list_embed = discord.Embed(
             title="사이트 목록입니다.",
-            description="네이버\n"
+            description="네이버 naver\n"
             "구글 google\n"
             "다음 daum\n"
             "유튜브 youtube\n"
