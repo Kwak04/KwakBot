@@ -94,7 +94,9 @@ async def on_message(message):
         help_embed.add_field(
             name="사이트 이동",
             value="**콱봇 사이트 site** : "
-            "특정 사이트로 이동하는 링크를 출력합니다.\nex) 콱봇 사이트 네이버 or naver"
+            "특정 사이트로 이동하는 링크를 출력합니다.\nex) 콱봇 사이트 네이버 or naver\n"
+            "**콱봇 사이트 목록** : "
+            "이동할 수 있는 사이트 목록을 확인할 수 있습니다."
         )
         help_embed.add_field(
             name="콱봇과 놀기",
@@ -380,6 +382,25 @@ async def on_message(message):
             if site == "페이스북" or site == "facebook":
                 site_embed = createSiteEmbed("Facebook", "https://www.facebook.com", "https://cdn.discordapp.com/attachments/554154900020396033/554322603763040270/fb_icon_325x325.png")
                 await client.send_message(message.channel, embed=site_embed)
+
+            if site == "해시코드" or site == "hashcode":
+                site_embed = createSiteEmbed("Hashcode", "https://hashcode.co.kr/", "https://cdn.discordapp.com/attachments/554324092313141268/554325207968645133/ic_meta-d75a4fdc9eacdac15ab7d016ee69babf6aff049b1fc80a55f86dad5560da2cee.png")
+                await client.send_message(message.channel, embed=site_embed)
+
+    if message.content == "콱봇 사이트 목록":
+        site_list_embed = discord.Embed(
+            title="사이트 목록입니다.",
+            description="네이버\n"
+            "구글 google\n"
+            "다음 daum\n"
+            "유튜브 youtube\n"
+            "깃허브 github\n"
+            "사운드클라우드 soundcloud\n"
+            "페이스북 facebook\n"
+            "해시코드 hashcode",
+            color=0xffffff
+        )
+        await client.send_message(message.channel, embed=site_list_embed)
 
         # 콱봇과 놀기
         # 가위바위보
