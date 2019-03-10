@@ -341,15 +341,19 @@ async def on_message(message):
         except IndexError:
             pass
         else:
-            if site == "네이버" or site == "daum":
-                site_embed = discord.Embed(
-                    title="네이버",
-                    description="[사이트로 이동하기](https://www.naver.com/)",
+            def createSiteEmbed(site_name, site_url, site_thumbnail):
+                SiteEmbed = discord.Embed(
+                    title=site_name,
+                    description="[사이트로 이동하기](%s)" % site_url,
                     color=0x00ffff
                 )
-                site_embed.set_thumbnail(
-                    url="https://media.discordapp.net/attachments/554154900020396033/554291327181783062/mobile_212852414260.png"
+                SiteEmbed.set_thumbnail(
+                    url=site_thumbnail
                 )
+                return SiteEmbed
+
+            if site == "네이버" or site == "naver":
+                site_embed = createSiteEmbed("네이버", "https://www.naver.com/", "https://media.discordapp.net/attachments/554154900020396033/554291327181783062/mobile_212852414260.png")
                 await client.send_message(message.channel, embed=site_embed)
 
             if site == "구글" or site == "google":
