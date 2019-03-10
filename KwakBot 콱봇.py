@@ -8,7 +8,7 @@ import discord
 import random
 import requests
 import json
-import openpyxl
+from datetime import datetime
 
 
 # 준비
@@ -44,6 +44,7 @@ async def on_message(message):
     if message.content in help_keyword:
         counter("도움말을 출력합니다.")
 
+        # TODO 버튼식으로 넘어가게 만들기
         help_embed = discord.Embed(
             title="콱봇 도움말 :D",
             description="콱봇을 사용하는 방법에 대해서 설명합니다.",
@@ -52,19 +53,22 @@ async def on_message(message):
         help_embed.add_field(
             name="도움말 보기",
             value="**콱봇 도와줘** or **콱봇 도움말** or **콱봇 help** : \n"
-            "총 3가지의 방법으로 도움말을 불러오실 수 있습니다.",
+            "총 3가지의 방법으로 도움말을 불러오실 수 있습니다."
+            ,
             inline=False
         )
         help_embed.add_field(
             name="엔터테인먼트",
             value="**콱봇 사로** or **콱봇 saro** : "
-            "루프스테이션의 신 Saro의 영상을 보실 수 있습니다.",
+            "루프스테이션의 신 Saro의 영상을 보실 수 있습니다."
+            ,
             inline=False
         )
         help_embed.add_field(
             name="선택하기",
             value="**콱봇 선택** a b c or **콱봇 골라** a b c: "
-            "a, b, c 중 하나를 콱봇이 선택합니다.",
+            "a, b, c 중 하나를 콱봇이 선택합니다."
+            ,
             inline=False
         )
         help_embed.add_field(
@@ -72,8 +76,25 @@ async def on_message(message):
             value="**콱봇 한영번역** 어쩌구저쩌구 : "
             "입력한 한국어를 영어로 번역합니다.\n"
             "**콱봇 영한번역** blahblah : "
-            "입력한 영어를 한국어로 번역합니다.",
+            "입력한 영어를 한국어로 번역합니다."
+            ,
             inline=False
+        )
+        help_embed.add_field(
+            name="시간 알려주기",
+            value="**콱봇 시간** : "
+            "현재 시간을 출력합니다.\n"
+            "**콱봇 날짜** : "
+            "오늘 날짜를 출력합니다.\n"
+            "**콱봇 시간날짜** : "
+            "시간과 날짜를 동시에 출력합니다."
+            ,
+            inline=False
+        )
+        help_embed.add_field(
+            name="사이트 이동",
+            value="**콱봇 사이트 site** : "
+            "특정 사이트로 이동하는 링크를 출력합니다.\nex) 콱봇 사이트 네이버"
         )
         help_embed.add_field(
             name="콱봇과 놀기",
@@ -82,19 +103,21 @@ async def on_message(message):
             "**콱봇 하나빼기** : "
             "콱봇과 하나빼기를 합니다.\n"
             "**콱봇 묵찌빠** : "
-            "만들기 귀찮습니다.",
+            "만들기 귀찮습니다."
+            ,
             inline=False
         )
         help_embed.add_field(
             name="기타",
             value="**콱봇 프사** : "
-            "콱봇의 프로필 사진을 보여줍니다."
+            "콱봇의 프로필 사진을 보여줍니다.",
+            inline=False
         )
         help_embed.set_thumbnail(
             url="https://cdn.discordapp.com/attachments/547642671460515841/551420106585145359/awesome_face.png"
         )
         help_embed.set_footer(
-            text="by Tronix (사정상 요즘 만들기가 어렵네요)",
+            text="by Tronix",
             icon_url="https://cdn.discordapp.com/attachments/547642671460515841/549600907700994050/KakaoTalk_20190127_152958900.jpg"
         )
         await client.send_message(message.channel, embed=help_embed)
@@ -108,14 +131,14 @@ async def on_message(message):
         counter("콱봇이 인사합니다.")
         await client.send_message(message.channel, "안녕하세요 :D")
 
-    #     # 반응
-    # if message.content.startswith("ㅋㅋㅋㅋㅋㅋ") or message.content.endswith("ㅋㅋㅋㅋㅋㅋ"):
-    #     counter("콱봇이 따라 웃습니다.")
-    #     await client.send_message(message.channel, "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ")
+        # 반응
+    if message.content.startswith("ㅋㅋㅋㅋㅋㅋ") or message.content.endswith("ㅋㅋㅋㅋㅋㅋ"):
+        counter("콱봇이 따라 웃습니다.")
+        await client.send_message(message.channel, "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ")
 
-    # if message.content.startswith("??") or message.content.endswith("??"):
-    #     counter("콱봇이 물음표를 띄웁니다.")
-    #     await client.send_message(message.channel, "???")
+    if message.content.startswith("??") or message.content.endswith("??"):
+        counter("콱봇이 물음표를 띄웁니다.")
+        await client.send_message(message.channel, "???")
 
     if message.content == "!!":
         counter("..!!!")
@@ -151,12 +174,16 @@ async def on_message(message):
         await client.send_message(message.channel, "다녀오셨어요?")
 
         # 욕 감지
-    words = ["씨발", "시발", "ㅅㅂ", "좆", "병신", "ㅄ", "ㅂㅅ", "쌍", "썅", "ㅆ", "개새끼", "새끼"]
+    words = ["씨발", "시발", "ㅅㅂ", "좆", "병신", "ㅄ", "ㅂㅅ", "쌍", "썅", "ㅆ", "새끼"]
     for i in range(len(words)):
         if words[i] in message.content:
             counter("욕을 감지했습니다.")
-            await client.delete_message(message)
-            await client.send_message(message.channel, "<@%s>님 욕하지 마세요~~^^" % message.author.id)
+            try:
+                await client.delete_message(message)
+            except discord.errors.NotFound:
+                pass
+            else:
+                await client.send_message(message.channel, "<@%s>님 욕하지 마세요~~^^" % message.author.id)
 
     # 정보 (접두사(콱봇) 있음)
         # 인물정보
@@ -178,7 +205,7 @@ async def on_message(message):
 
     if message.content == "콱봇 Rio" or message.content == "콱봇 rio" or message.content == "콱봇 리오":
         counter("Rio에 대해 출력합니다.")
-        await client.send_message(message.channel, "제 친구 띵킹봇의 개발자입니다!")
+        await client.send_message(message.channel, "제 친구 기어봇의 개발자입니다!")
 
     if message.content == "콱봇 굴굴이":
         counter("굴굴이에 대해 출력합니다.")
@@ -188,7 +215,7 @@ async def on_message(message):
         counter("Rio에 대해 반대로 출력합니다.")
         await client.send_message(message.channel, "!다니입자발개 의봇킹띵 구친 제")
 
-    if message.content == "콱봇 띵킹봇":
+    if message.content == "콱봇 기어봇":
         counter("띵킹봇에 대해 출력합니다.")
         await client.send_message(message.channel, "제 친구이자 제 개발자의 친구의 봇입니다!")
 
@@ -214,6 +241,7 @@ async def on_message(message):
         await client.send_message(message.channel, saro)
 
         # 실용적인 기능
+        # 선택
     if message.content.startswith("콱봇 선택") or message.content.startswith("콱봇 골라"):
         try:
             counter("콱봇이 항목들 중 하나를 선택합니다.")
@@ -230,6 +258,7 @@ async def on_message(message):
             )
             await client.send_message(message.channel, embed=choose_embed)
 
+        # 번역
     if message.content.startswith("콱봇 한영번역"):
         counter("한국어에서 영어로 번역합니다.")
 
@@ -267,6 +296,94 @@ async def on_message(message):
             color=0x00ffff
         )
         await client.send_message(message.channel, embed=trans_ek_embed)
+
+        # 시간
+    if message.content == "콱봇 시간":
+        counter("시간을 출력합니다.")
+        now = datetime.now()
+        time_embed = discord.Embed(
+            title="현재 시간은...",
+            description="**%d시 %d분 %d초**입니다!" % (abs(now.hour - 12), now.minute, now.second),
+            color=0xffff00
+        )
+        await client.send_message(message.channel, embed=time_embed)
+
+    if message.content == "콱봇 날짜":
+        counter("날짜를 출력합니다.")
+        now = datetime.now()
+        date_embed = discord.Embed(
+            title="오늘 날짜는...",
+            description="**%d년 %d월 %d일**입니다!" % (now.year, now.month, now.day),
+            color=0xffff00
+        )
+        await client.send_message(message.channel, embed=date_embed)
+
+    if message.content == "콱봇 시간날짜":
+        counter("시간과 날짜를 출력합니다.")
+        now = datetime.now()
+        timedate_embed = discord.Embed(
+            title="지금은...",
+            description="**%d년 %d월 %d일\n%d시 %d분 %d초**입니다!"
+                        % (now.year, now.month, now.day, abs(now.hour - 12), now.minute, now.second),
+            color=0xffff00
+        )
+        await client.send_message(message.channel, embed=timedate_embed)
+
+        # 사이트 이동
+    if message.content.startswith("콱봇 사이트"):
+        counter("특정 사이트로 이동합니다.")
+        try:
+            site = message.content[7:]
+        except IndexError:
+            pass
+        else:
+            if site == "네이버" or site == "daum":
+                site_embed = discord.Embed(
+                    title="네이버",
+                    description="[사이트로 이동하기](https://www.naver.com/)",
+                    color=0x00ffff
+                )
+                site_embed.set_thumbnail(
+                    url="https://media.discordapp.net/attachments/554154900020396033/554291327181783062/mobile_212852414260.png"
+                )
+                await client.send_message(message.channel, embed=site_embed)
+
+            if site == "구글" or site == "google":
+                site_embed = discord.Embed(
+                    title="Google",
+                    description="[사이트로 이동하기](https://www.google.com/)",
+                    color=0x00ffff
+                )
+                site_embed.set_thumbnail(
+                    url="https://media.discordapp.net/attachments/554154900020396033/554301508834033664/AAuE7mAOzJeUhnaCQpCrB8z58jvoroZFpAAB_9nD7ws900-mo-c-c0xffffffff-rj-k-no.png"
+                )
+                await client.send_message(message.channel, embed=site_embed)
+
+            if site == "다음" or site == "daum":
+                site_embed = discord.Embed(
+                    title="다음",
+                    description="[사이트로 이동하기](https://www.daum.net/)",
+                    color=0x00ffff
+                )
+                site_embed.set_thumbnail(
+                    url="https://media.discordapp.net/attachments/554154900020396033/554295052411863050/5587C4E4012FCD0001.png"
+                )
+                await client.send_message(message.channel, embed=site_embed)
+
+            if site == "유튜브" or site == "youtube":
+                site_embed = discord.Embed(
+                    title="YouTube",
+                    description="[사이트로 이동하기](https://www.youtube.com/)",
+                    color = 0x00ffff
+                )
+                site_embed.set_thumbnail(
+                    url="https://media.discordapp.net/attachments/554154900020396033/554296606158094366/yt_1200-vfl4C3T0K.png"
+                )
+                await client.send_message(message.channel, embed=site_embed)
+
+            if site == "폰허브" or site == "pornhub":
+                await client.send_message(message.channel, "https://www.pornhub.com/")
+
 
         # 콱봇과 놀기
         # 가위바위보
@@ -365,6 +482,7 @@ async def on_message(message):
 
         # 묵찌빠
     if message.content == "콱봇 묵찌빠":
+        # TODO 묵찌빠 만들기
         mjb_embed = discord.Embed(
             title="개발 예정입니다.",
             description="나중에 꼭 만들도록 하겠습니다!",
@@ -372,6 +490,7 @@ async def on_message(message):
         )
         await client.send_message(message.channel, embed=mjb_embed)
 
+    # TODO 가위바위보 하나빼기 묵찌빠 버튼식으로 바꾸기
     if message.content == "콱봇 테스트":
         await client.send_message(message.channel, "아무거나 입력하세요.")
         await client.wait_for_message(timeout=10, author=message.author, channel=message.channel)
@@ -381,9 +500,6 @@ async def on_message(message):
         await client.add_reaction(msg, "🖐")
         res = await client.wait_for_reaction(["✊", "✌", "🖐"], message=message, timeout=5, user=message.author)
         await client.send_message(message.channel, "{0.reaction.emoji}".format(res))
-
-
-
 
         # 기타
     if message.content == "콱봇 프사":
