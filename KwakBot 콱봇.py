@@ -341,6 +341,7 @@ async def on_message(message):
         except IndexError:
             pass
         else:
+            # site_embed 만드는 함수 생성
             def createSiteEmbed(site_name, site_url, site_thumbnail):
                 SiteEmbed = discord.Embed(
                     title=site_name,
@@ -357,36 +358,15 @@ async def on_message(message):
                 await client.send_message(message.channel, embed=site_embed)
 
             if site == "구글" or site == "google":
-                site_embed = discord.Embed(
-                    title="Google",
-                    description="[사이트로 이동하기](https://www.google.com/)",
-                    color=0x00ffff
-                )
-                site_embed.set_thumbnail(
-                    url="https://media.discordapp.net/attachments/554154900020396033/554301508834033664/AAuE7mAOzJeUhnaCQpCrB8z58jvoroZFpAAB_9nD7ws900-mo-c-c0xffffffff-rj-k-no.png"
-                )
+                site_embed = createSiteEmbed("Google", "https://www.google.com/", "https://media.discordapp.net/attachments/554154900020396033/554301508834033664/AAuE7mAOzJeUhnaCQpCrB8z58jvoroZFpAAB_9nD7ws900-mo-c-c0xffffffff-rj-k-no.png")
                 await client.send_message(message.channel, embed=site_embed)
 
             if site == "다음" or site == "daum":
-                site_embed = discord.Embed(
-                    title="다음",
-                    description="[사이트로 이동하기](https://www.daum.net/)",
-                    color=0x00ffff
-                )
-                site_embed.set_thumbnail(
-                    url="https://media.discordapp.net/attachments/554154900020396033/554295052411863050/5587C4E4012FCD0001.png"
-                )
+                site_embed = createSiteEmbed("다음", "https://www.daum.net/", "https://media.discordapp.net/attachments/554154900020396033/554295052411863050/5587C4E4012FCD0001.png")
                 await client.send_message(message.channel, embed=site_embed)
 
             if site == "유튜브" or site == "youtube":
-                site_embed = discord.Embed(
-                    title="YouTube",
-                    description="[사이트로 이동하기](https://www.youtube.com/)",
-                    color = 0x00ffff
-                )
-                site_embed.set_thumbnail(
-                    url="https://media.discordapp.net/attachments/554154900020396033/554296606158094366/yt_1200-vfl4C3T0K.png"
-                )
+                site_embed = createSiteEmbed("Youtube", "https://www.youtube.com/", "https://media.discordapp.net/attachments/554154900020396033/554296606158094366/yt_1200-vfl4C3T0K.png")
                 await client.send_message(message.channel, embed=site_embed)
 
             if site == "폰허브" or site == "pornhub":
