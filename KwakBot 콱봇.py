@@ -130,6 +130,10 @@ async def on_message(message):
     if message.content == "콱봇 안녕":
         counter("콱봇이 인사합니다.")
         await client.send_message(message.channel, "안녕하세요 :D")
+        
+    if message.content == "콱봇 ㅎㅇ":
+        counter("콱봇이 인사합니다.")
+        await client.send_message(message.channel, "ㅎㅇ염 ㅎㅎ")
 
         # 반응
     if message.content.startswith("ㅋㅋㅋㅋㅋㅋ") or message.content.endswith("ㅋㅋㅋㅋㅋㅋ"):
