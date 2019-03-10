@@ -94,7 +94,7 @@ async def on_message(message):
             url="https://cdn.discordapp.com/attachments/547642671460515841/551420106585145359/awesome_face.png"
         )
         help_embed.set_footer(
-            text="by Tronix",
+            text="by Tronix (사정상 요즘 만들기가 어렵네요)",
             icon_url="https://cdn.discordapp.com/attachments/547642671460515841/549600907700994050/KakaoTalk_20190127_152958900.jpg"
         )
         await client.send_message(message.channel, embed=help_embed)
@@ -150,13 +150,13 @@ async def on_message(message):
         counter("콱봇이 인사합니다.")
         await client.send_message(message.channel, "다녀오셨어요?")
 
-    #     # 욕 감지
-    # words = ["씨발", "시발", "ㅅㅂ", "좆", "병신", "ㅄ", "ㅂㅅ", "쌍", "썅", "ㅆ", "개새끼", "새끼"]
-    # for i in range(len(words)):
-    #     if words[i] in message.content:
-    #         counter("욕을 감지했습니다.")
-    #         await client.delete_message(message)
-    #         await client.send_message(message.channel, "<@%s>님 욕하지 마세요~~^^" % message.author.id)
+        # 욕 감지
+    words = ["씨발", "시발", "ㅅㅂ", "좆", "병신", "ㅄ", "ㅂㅅ", "쌍", "썅", "ㅆ", "개새끼", "새끼"]
+    for i in range(len(words)):
+        if words[i] in message.content:
+            counter("욕을 감지했습니다.")
+            await client.delete_message(message)
+            await client.send_message(message.channel, "<@%s>님 욕하지 마세요~~^^" % message.author.id)
 
     # 정보 (접두사(콱봇) 있음)
         # 인물정보
@@ -362,6 +362,15 @@ async def on_message(message):
                     color=0xffff00
                 )
                 await client.send_message(message.channel, embed=hnp_embed)
+
+        # 묵찌빠
+    if message.content == "콱봇 묵찌빠":
+        mjb_embed = discord.Embed(
+            title="개발 예정입니다.",
+            description="나중에 꼭 만들도록 하겠습니다!",
+            color=0xff0000
+        )
+        await client.send_message(message.channel, embed=mjb_embed)
 
     if message.content == "콱봇 테스트":
         await client.send_message(message.channel, "아무거나 입력하세요.")
