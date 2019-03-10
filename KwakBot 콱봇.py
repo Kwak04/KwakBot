@@ -94,7 +94,7 @@ async def on_message(message):
         help_embed.add_field(
             name="사이트 이동",
             value="**콱봇 사이트 site** : "
-            "특정 사이트로 이동하는 링크를 출력합니다.\nex) 콱봇 사이트 네이버"
+            "특정 사이트로 이동하는 링크를 출력합니다.\nex) 콱봇 사이트 네이버 or naver"
         )
         help_embed.add_field(
             name="콱봇과 놀기",
@@ -136,13 +136,13 @@ async def on_message(message):
         await client.send_message(message.channel, "ㅎㅇ염 ㅎㅎ")
 
         # 반응
-    if message.content.startswith("ㅋㅋㅋㅋㅋㅋ") or message.content.endswith("ㅋㅋㅋㅋㅋㅋ"):
-        counter("콱봇이 따라 웃습니다.")
-        await client.send_message(message.channel, "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ")
-
-    if message.content.startswith("??") or message.content.endswith("??"):
-        counter("콱봇이 물음표를 띄웁니다.")
-        await client.send_message(message.channel, "???")
+    # if message.content.startswith("ㅋㅋㅋㅋㅋㅋ") or message.content.endswith("ㅋㅋㅋㅋㅋㅋ"):
+    #     counter("콱봇이 따라 웃습니다.")
+    #     await client.send_message(message.channel, "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ")
+    #
+    # if message.content.startswith("??") or message.content.endswith("??"):
+    #     counter("콱봇이 물음표를 띄웁니다.")
+    #     await client.send_message(message.channel, "???")
 
     if message.content == "!!":
         counter("..!!!")
@@ -366,12 +366,20 @@ async def on_message(message):
                 await client.send_message(message.channel, embed=site_embed)
 
             if site == "유튜브" or site == "youtube":
-                site_embed = createSiteEmbed("Youtube", "https://www.youtube.com/", "https://media.discordapp.net/attachments/554154900020396033/554296606158094366/yt_1200-vfl4C3T0K.png")
+                site_embed = createSiteEmbed("YouTube", "https://www.youtube.com/", "https://media.discordapp.net/attachments/554154900020396033/554296606158094366/yt_1200-vfl4C3T0K.png")
                 await client.send_message(message.channel, embed=site_embed)
 
-            if site == "폰허브" or site == "pornhub":
-                await client.send_message(message.channel, "https://www.pornhub.com/")
+            if site == "깃허브" or site == "github":
+                site_embed = createSiteEmbed("GitHub", "https://www.github.com/", "https://cdn.discordapp.com/attachments/554154900020396033/554319935480922112/9919.png")
+                await client.send_message(message.channel, embed=site_embed)
 
+            if site == "사운드클라우드" or site == "soundcloud":
+                site_embed = createSiteEmbed("SoundCloud", "https://soundcloud.com/discover", "https://cdn.discordapp.com/attachments/554154900020396033/554321777866702872/u4Xt7sb8_400x400.png")
+                await client.send_message(message.channel, embed=site_embed)
+
+            if site == "페이스북" or site == "facebook":
+                site_embed = createSiteEmbed("Facebook", "https://www.facebook.com", "https://cdn.discordapp.com/attachments/554154900020396033/554322603763040270/fb_icon_325x325.png")
+                await client.send_message(message.channel, embed=site_embed)
 
         # 콱봇과 놀기
         # 가위바위보
