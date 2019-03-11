@@ -94,7 +94,7 @@ async def on_message(message):
         help_embed.add_field(
             name="사이트 이동",
             value="**콱봇 사이트 site** : "
-            "특정 사이트로 이동하는 링크를 출력합니다.\nex) 콱봇 사이트 네이버 or naver\n"
+            "특정 사이트로 이동하는 링크를 출력합니다.\nex) 콱봇 사이트 네이버 or naver (한/영 상관없음)\n"
             "**콱봇 사이트 목록** : "
             "이동할 수 있는 사이트 목록을 확인할 수 있습니다."
         )
@@ -508,15 +508,18 @@ async def on_message(message):
         await client.send_message(message.channel, embed=mjb_embed)
 
     # TODO 가위바위보 하나빼기 묵찌빠 버튼식으로 바꾸기
+
     if message.content == "콱봇 테스트":
-        await client.send_message(message.channel, "아무거나 입력하세요.")
-        await client.wait_for_message(timeout=10, author=message.author, channel=message.channel)
-        msg = await client.send_message(message.channel, "아래 중 하나를 선택하세요.")
-        await client.add_reaction(msg, "✊")
-        await client.add_reaction(msg, "✌")
-        await client.add_reaction(msg, "🖐")
-        res = await client.wait_for_reaction(["✊", "✌", "🖐"], message=message, timeout=5, user=message.author)
-        await client.send_message(message.channel, "{0.reaction.emoji}".format(res))
+        test_msg = await client.send_message(message.channel, "좋아요 싫어요")
+        await client.add_reaction(test_msg, "👍")
+        await client.add_reaction(test_msg, "👎")
+        def check(reaction, user):
+            e = str(reaction.emoji)
+            return e.startswith(("👍", "👎"))
+        test_res = await client.wait_for_reaction(message=test_msg, check=check, timeout=5)
+        await client.send_message(message.channel, "{0.user} (이)가 {0.reaction.emoji} 로 응답했습니다!".format(test_res))
+        # FIXME 콱봇이 응답했다고 나오는 문제 해결 예정...
+
 
         # 기타
     if message.content == "콱봇 프사":
