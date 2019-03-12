@@ -513,13 +513,12 @@ async def on_message(message):
         test_msg = await client.send_message(message.channel, "좋아요 싫어요")
         await client.add_reaction(test_msg, "👍")
         await client.add_reaction(test_msg, "👎")
+
         def check(reaction, user):
             e = str(reaction.emoji)
             return e.startswith(("👍", "👎"))
-        test_res = await client.wait_for_reaction(message=test_msg, check=check, timeout=5)
+        test_res = await client.wait_for_reaction(message=test_msg, check=check, user=message.author)
         await client.send_message(message.channel, "{0.user} (이)가 {0.reaction.emoji} 로 응답했습니다!".format(test_res))
-        # FIXME 콱봇이 응답했다고 나오는 문제 해결 예정...
-
 
         # 기타
     if message.content == "콱봇 프사":
