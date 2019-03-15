@@ -119,67 +119,52 @@ async def on_message(message):
             url="https://cdn.discordapp.com/attachments/547642671460515841/551420106585145359/awesome_face.png"
         )
         help_embed.set_footer(
-            text="by Tronix",
+            text="by Tronix (도움말 리뉴얼 중입니다.)",
             icon_url="https://cdn.discordapp.com/attachments/547642671460515841/549600907700994050/KakaoTalk_20190127_152958900.jpg"
         )
         await client.send_message(message.channel, embed=help_embed)
 
-        help_embed = discord.Embed(
+    if message.content == "콱봇 베타":
+        help_beta_embed = discord.Embed(
             title="콱봇 도움말 :D",
             description="콱봇을 사용하는 방법에 대해서 설명합니다.\n"
-            "**콱봇 도와줘** or **콱봇 도움말** or **콱봇 help**\n"
-            "위의 3가지 방법으로 도움말을 불러오실 수 있습니다.",
+                        "**콱봇 도와줘** or **콱봇 도움말** or **콱봇 help**\n"
+                        "위의 3가지 방법으로 도움말을 불러오실 수 있습니다.",
             color=0xffffff
         )
-        help_embed.add_field(
+        help_beta_embed.add_field(
             name="아래 이모지들을 눌러 관련 도움말을 펼치세요.",
-            value=":one: "
+            value=":clapper: 1. 엔터테인먼트\n"
+            ":slot_machine: 2. 선택하기\n"
+            ":notebook_with_decorative_cover: 3. 번역하기\n"
+            ":alarm_clock: 4. 시간 알려주기\n"
+            ":mag_right: 5. 사이트 이동\n"
+            ":video_game: 6. 콱봇과 놀기\n"
+            ":gear: 7. 기타"
         )
-        help_embed.set_thumbnail(
+        help_beta_embed.set_thumbnail(
             url="https://cdn.discordapp.com/attachments/547642671460515841/551420106585145359/awesome_face.png"
         )
-        help_embed.set_footer(
+        help_beta_embed.set_footer(
             text="by Tronix",
             icon_url="https://cdn.discordapp.com/attachments/547642671460515841/549600907700994050/KakaoTalk_20190127_152958900.jpg"
         )
-        await client.send_message(message.channel, embed=help_embed)
+        await client.send_message(message.channel, embed=help_beta_embed)
 
-    # if message.content == "콱봇 베타":
-    #     help_beta_embed = discord.Embed(
-    #         title="콱봇 도움말 :D",
-    #         description="콱봇을 사용하는 방법에 대해서 설명합니다.\n"
-    #                     "**콱봇 도와줘** or **콱봇 도움말** or **콱봇 help**\n"
-    #                     "위의 3가지 방법으로 도움말을 불러오실 수 있습니다.",
-    #         color=0xffffff
-    #     )
-    #     help_beta_embed.add_field(
-    #         name="아래 이모지들을 눌러 관련 도움말을 펼치세요.",
-    #         value=":one: 엔터테인먼트\n"
-    #         ":two: 선택하기\n"
-    #         ":three: 번역하기\n"
-    #         ":four: 시간 알려주기\n"
-    #         ":five: 사이트 이동\n"
-    #         ":six: 콱봇과 놀기\n"
-    #         ":seven: 기타"
-    #     )
-    #     help_beta_embed.set_thumbnail(
-    #         url="https://cdn.discordapp.com/attachments/547642671460515841/551420106585145359/awesome_face.png"
-    #     )
-    #     help_beta_embed.set_footer(
-    #         text="by Tronix",
-    #         icon_url="https://cdn.discordapp.com/attachments/547642671460515841/549600907700994050/KakaoTalk_20190127_152958900.jpg"
-    #     )
-    #     await client.send_message(message.channel, embed=help_beta_embed)
-    #
-    #     help_msg = await client.send_message(message.channel, "고르세요")
-    #     await client.add_reaction(help_msg, "")
-    #     await client.add_reaction(help_msg, "👎")
-    #
-    #     def check(reaction, user):
-    #         e = str(reaction.emoji)
-    #         return e.startswith(("👍", "👎"))
-    #     help_res = await client.wait_for_reaction(message=help_msg, check=check, user=message.author)
-    #     print(help_res)
+        help_msg = await client.send_message(message.channel, "▼")
+        await client.add_reaction(help_msg, "🎬")
+        await client.add_reaction(help_msg, "🎰")
+        await client.add_reaction(help_msg, "📔")
+        await client.add_reaction(help_msg, "⏰")
+        await client.add_reaction(help_msg, "🔎")
+        await client.add_reaction(help_msg, "🎮")
+        await client.add_reaction(help_msg, "⚙")
+
+        # def check(reaction, user):
+        #     e = str(reaction.emoji)
+        #     return e.startswith(("👍", "👎"))
+        # help_res = await client.wait_for_reaction(message=help_msg, check=check, user=message.author)
+        # print(help_res)
 
     # 일상대화 (접두사(콱봇) 없음)
     if message.content == "콱봇":
