@@ -485,59 +485,73 @@ async def on_message(message):
     if message.content.startswith("콱봇 하나빼기"):
         counter("콱봇과 하나빼기를 합니다.")
 
-        await client.send_message(message.channel, "일단 먼저 가위바위보 중에 2개를 골라주세요! (공백 구분)")
-        hnp_user_input = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
+        while True:
 
-        if hnp_user_input is None:
-            hnp_timeover_embed_middle = discord.Embed(
-                title="시간이 지났습니다.",
-                description="왜 안 고르세요? :(",
-                color=0xff0000
-            )
-            client.send_message(message.channel, embed=hnp_timeover_embed_middle)
+            await client.send_message(message.channel, "일단 먼저 가위바위보 중에 2개를 골라주세요! (공백 구분)")
+            hnp_user_input = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
 
-        else:
-            hnp_user_input = hnp_user_input.content.split()
-            hnp_user1, hnp_user2 = hnp_user_input[0], hnp_user_input[1]
-            hnp_list = ["가위", "바위", "보"]
-            hnp_com1, hnp_com2 = 0, 0
-            while hnp_com1 == hnp_com2:
-                hnp_com1, hnp_com2 = random.choice(hnp_list), random.choice(hnp_list)
-
-            hnp_embed_middle = discord.Embed(
-                title="%s와 %s 중에 무엇을 내시겠어요?" % (hnp_user1, hnp_user2),
-                description="콱봇 : %s  %s\n당신 : %s  %s" % (hnp_com1, hnp_com2, hnp_user1, hnp_user2)
-            )
-            await client.send_message(message.channel, embed=hnp_embed_middle)
-
-            hnp_user = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
-
-            if hnp_user is None:
-                hnp_timeover_embed = discord.Embed(
+            if hnp_user_input is None:
+                hnp_timeover_embed_middle = discord.Embed(
                     title="시간이 지났습니다.",
                     description="왜 안 고르세요? :(",
                     color=0xff0000
                 )
-                await client.send_message(message.channel, embed=hnp_timeover_embed)
+                client.send_message(message.channel, embed=hnp_timeover_embed_middle)
+
             else:
-                hnp_user = hnp_user.content
-                hnp_com = random.choice([hnp_com1, hnp_com2])
+                hnp_user_input = hnp_user_input.content.split()
+                hnp_user1, hnp_user2, hnp = 0, 0, 0
+                try:
+                    hnp_user1, hnp_user2 = hnp_user_input[0], hnp_user_input[1]
+                except IndexError:
+                    hnp_error_embed = discord.Embed(
+                        title="가위바위보 중 2개를 골라주셔야 합니다.",
+                        description="<@%s>님이 진 걸로 ㅎㅎ" % message.author.id,
+                        color=0xff0000
+                    )
+                    await client.send_message(message.channel, embed=hnp_error_embed)
+                    break
+                hnp_list = ["가위", "바위", "보"]
+                hnp_com1, hnp_com2 = 0, 0
+                while hnp_com1 == hnp_com2:
+                    hnp_com1, hnp_com2 = random.choice(hnp_list), random.choice(hnp_list)
 
-                if hnp_user not in hnp_list:
-                    hnp = "이상한 거 내지 말라구욧!"
-                if (hnp_user == "가위" and hnp_com == "보") or (hnp_user == "바위" and hnp_com == "가위") or (hnp_user == "보" and hnp_com == "바위"):
-                    hnp = "<@%s>님이 이겼네요! 축하해요~" % message.author.id
-                if (hnp_user == "가위" and hnp_com == "바위") or (hnp_user == "바위" and hnp_com == "보") or (hnp_user == "보" and hnp_com == "가위"):
-                    hnp = "<@%s>님이 졌네요..." % message.author.id
-                if hnp_user == hnp_com:
-                    hnp = "비겼네요. ㅎㅎ"
-
-                hnp_embed = discord.Embed(
-                    title="콱봇의 선택 : %s" % hnp_com,
-                    description=hnp,
-                    color=0xffff00
+                hnp_embed_middle = discord.Embed(
+                    title="%s와 %s 중에 무엇을 내시겠어요?" % (hnp_user1, hnp_user2),
+                    description="콱봇 : %s  %s\n당신 : %s  %s" % (hnp_com1, hnp_com2, hnp_user1, hnp_user2)
                 )
-                await client.send_message(message.channel, embed=hnp_embed)
+                await client.send_message(message.channel, embed=hnp_embed_middle)
+
+                hnp_user = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
+
+                if hnp_user is None:
+                    hnp_timeover_embed = discord.Embed(
+                        title="시간이 지났습니다.",
+                        description="왜 안 고르세요? :(",
+                        color=0xff0000
+                    )
+                    await client.send_message(message.channel, embed=hnp_timeover_embed)
+                    break
+                else:
+                    hnp_user = hnp_user.content
+                    hnp_com = random.choice([hnp_com1, hnp_com2])
+
+                    if hnp_user not in hnp_list:
+                        hnp = "이상한 거 내지 말라구욧!"
+                    if (hnp_user == "가위" and hnp_com == "보") or (hnp_user == "바위" and hnp_com == "가위") or (hnp_user == "보" and hnp_com == "바위"):
+                        hnp = "<@%s>님이 이겼네요! 축하해요~" % message.author.id
+                    if (hnp_user == "가위" and hnp_com == "바위") or (hnp_user == "바위" and hnp_com == "보") or (hnp_user == "보" and hnp_com == "가위"):
+                        hnp = "<@%s>님이 졌네요..." % message.author.id
+                    if hnp_user == hnp_com:
+                        hnp = "비겼네요. ㅎㅎ"
+
+                    hnp_embed = discord.Embed(
+                        title="콱봇의 선택 : %s" % hnp_com,
+                        description=hnp,
+                        color=0xffff00
+                    )
+                    await client.send_message(message.channel, embed=hnp_embed)
+                    break
 
     #     # 묵찌빠
     # if message.content == "콱봇 묵찌빠":
