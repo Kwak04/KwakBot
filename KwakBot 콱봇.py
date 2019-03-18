@@ -264,12 +264,12 @@ async def on_message(message):
         await client.send_message(message.channel, "!다니입자발개 의봇킹띵 구친 제")
 
     if message.content == "콱봇 기어봇":
-        counter("띵킹봇에 대해 출력합니다.")
+        counter("기어봇에 대해 출력합니다.")
         await client.send_message(message.channel, "제 친구이자 제 개발자의 친구의 봇입니다!")
 
-    if "지뢰봇" in message.content:
-        counter("지뢰봇에 대해 출력합니다.")
-        await client.send_message(message.channel, "그 친구는 죽었다구요...ㅠㅠ")
+    # if "지뢰봇" in message.content:
+    #     counter("지뢰봇에 대해 출력합니다.")
+    #     await client.send_message(message.channel, "그 친구는 죽었다구요...ㅠㅠ")
 
     if message.content == "콱봇 근육돼지":
         await client.send_message(message.channel, "그 친구는 항상 먹고 있더라고요!")
@@ -539,17 +539,72 @@ async def on_message(message):
                 )
                 await client.send_message(message.channel, embed=hnp_embed)
 
-        # 묵찌빠
-    if message.content == "콱봇 묵찌빠":
-        # TODO 묵찌빠 만들기
-        mjb_embed = discord.Embed(
-            title="개발 예정입니다.",
-            description="나중에 꼭 만들도록 하겠습니다!",
-            color=0xff0000
-        )
-        await client.send_message(message.channel, embed=mjb_embed)
+    #     # 묵찌빠
+    # if message.content == "콱봇 묵찌빠":
+    #     counter("콱봇과 묵찌빠를 합니다.")
+    #
+    #     while True:
+    #         await client.send_message(message.channel, "묵찌빠 중 하나를 골라주세요!")
+    #         mjb_user = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
+    #
+    #         if mjb_user is None:
+    #             mjb_timeover_embed = discord.Embed(
+    #                 title="시간이 지났습니다.",
+    #                 description="왜 안 고르세요? :(",
+    #                 color=0xff0000
+    #             )
+    #             client.send_message(message.channel, embed=mjb_timeover_embed)
+    #
+    #         else:
+    #             mjb_attack, mjb_user_, mjb_count, mjb_attack, mjb = 0, 0, 0, 0, 0
+    #
+    #             def whattosay(cnt, old, new):  # title
+    #                 if cnt == 0:
+    #                     return "가위바위보!"
+    #                 else:
+    #                     return old + old + new + "!"
+    #
+    #             mjb_user = mjb_user.content
+    #             mjb_list = ["묵", "찌", "빠"]
+    #             mjb_com = random.choice(mjb_list)
+    #
+    #             mjb_middle_embed = discord.Embed(
+    #                 title=whattosay(mjb_count, mjb_user_, mjb_user) + " 무엇을 내시겠어요?",
+    #                 description="컴퓨터 : %s\n당신    : %s" % (mjb_com, mjb_user)
+    #             )
+    #             await client.send_message(message.channel, embed=mjb_middle_embed)
+    #
+    #             # 같은 것을 냈을 때
+    #             if mjb_user == mjb_com:
+    #                 if mjb_attack == "user":
+    #                     mjb = "<@%s>님이 이겼네요! 축하해요~" % message.author.id
+    #                     break
+    #                 elif mjb_attack == "com":
+    #                     mjb = "<@s>님이 졌네요..." % message.author.id
+    #                     break
+    #                 else:
+    #                     mjb = "비겼습니다. 다시 해 주세요."
+    #
+    #             # 다른 것을 냈을 때
+    #             else:
+    #                 mjb_count += 1
+    #
+    #                 if (mjb_user == "묵" and mjb_com == "찌") or (mjb_user == "찌" and mjb_com == "빠") or (mjb_user == "빠" and mjb_com == "묵"):
+    #                     mjb = "<@s>님이 이겼으므로 공격권을 가지게 되었습니다!" % message.author.id
+    #                     mjb_attack = "user"
+    #
+    #                 else:
+    #                     mjb = "컴퓨터가 이겼으므로 공격권을 뺏겼습니다!"
+    #                     mjb_attack = "com"
+    #
+    #     mjb_embed = discord.Embed(
+    #         title=mjb
+    #     )
+    #     await client.send_message(message.channel, embed=mjb_embed)
 
-    # TODO 가위바위보 하나빼기 묵찌빠 버튼식으로 바꾸기
+
+
+
 
     if message.content == "콱봇 테스트":
         test_msg = await client.send_message(message.channel, "좋아요 싫어요")
