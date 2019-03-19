@@ -44,7 +44,6 @@ async def on_message(message):
     if message.content in help_keyword:
         counter("도움말을 출력합니다.")
 
-        # TODO 버튼식으로 넘어가게 만들기
         help_embed = discord.Embed(
             title="콱봇 도움말 :D",
             description="콱봇을 사용하는 방법에 대해서 설명합니다.",
@@ -125,6 +124,8 @@ async def on_message(message):
         await client.send_message(message.channel, embed=help_embed)
 
     if message.content == "콱봇 베타":
+        # TODO 버튼식으로 넘어가게 만들기
+
         help_beta_embed = discord.Embed(
             title="콱봇 도움말 :D",
             description="콱봇을 사용하는 방법에 대해서 설명합니다.\n"
@@ -159,6 +160,34 @@ async def on_message(message):
         await client.add_reaction(help_msg, "🔎")
         await client.add_reaction(help_msg, "🎮")
         await client.add_reaction(help_msg, "⚙")
+
+        def check(reaction, user):
+            e = str(reaction.emoji)
+            return e.startswith(("🎬", "🎰", "📔", "⏰", "🔎", "🎮", "⚙"))
+
+        while True:
+            res = await client.wait_for_reaction(message=help_msg, check=check, user=message.author)
+
+            if "{0.reaction.emoji}".format(res) == "🎬":
+                await client.send_message(message.channel, "응 엔터테인먼트야~")
+
+            if "{0.reaction.emoji}".format(res) == "🎰":
+                await client.send_message(message.channel, "응 선택하기야~")
+
+            if "{0.reaction.emoji}".format(res) == "📔":
+                await client.send_message(message.channel, "응 번역하기야~")
+
+            if "{0.reaction.emoji}".format(res) == "⏰":
+                await client.send_message(message.channel, "응 시간 알려주기야~")
+
+            if "{0.reaction.emoji}".format(res) == "🔎":
+                await client.send_message(message.channel, "응 사이트 이동야~")
+
+            if "{0.reaction.emoji}".format(res) == "🎮":
+                await client.send_message(message.channel, "응 콱봇과 놀기야~")
+
+            if "{0.reaction.emoji}".format(res) == "⚙":
+                await client.send_message(message.channel, "응 기타야~")
 
         # def check(reaction, user):
         #     e = str(reaction.emoji)
@@ -228,7 +257,7 @@ async def on_message(message):
             counter("욕을 감지했습니다.")
             try:
                 await client.delete_message(message)
-            except discord.errors.NotFound:
+            except:
                 pass
             else:
                 await client.send_message(message.channel, "<@%s>님 욕하지 마세요~~^^" % message.author.id)
