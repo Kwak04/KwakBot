@@ -42,6 +42,8 @@ async def on_message(message):
     # 도움말
     help_keyword = ["콱봇 도와줘", "콱봇 도움말", "콱봇 도움", "콱봇 help"]
     if message.content in help_keyword:
+        counter("도움말을 출력합니다.")
+
         help_embed = discord.Embed(
             title="콱봇 도움말 :D",
             description="콱봇을 사용하는 방법에 대해서 설명합니다.\n"
@@ -63,7 +65,7 @@ async def on_message(message):
             url="https://cdn.discordapp.com/attachments/547642671460515841/551420106585145359/awesome_face.png"
         )
         help_embed.set_footer(
-            text="by Tronix",
+            text="Tronix",
             icon_url="https://cdn.discordapp.com/attachments/547642671460515841/549600907700994050/KakaoTalk_20190127_152958900.jpg"
         )
         await client.send_message(message.channel, embed=help_embed)
@@ -85,6 +87,8 @@ async def on_message(message):
             res = await client.wait_for_reaction(message=help_msg, check=check, user=message.author)
 
             if "{0.reaction.emoji}".format(res) == "🎬":
+                counter("엔터테인먼트 관련 도움말을 출력합니다.")
+
                 help_1_embed = discord.Embed(
                     title="콱봇 도움말 :D",
                     color=0xffffff
@@ -99,6 +103,8 @@ async def on_message(message):
                 await client.send_message(message.channel, embed=help_1_embed)
 
             if "{0.reaction.emoji}".format(res) == "🎰":
+                counter("선택하기 관련 도움말을 출력합니다.")
+
                 help_2_embed = discord.Embed(
                     title="콱봇 도움말 :D",
                     color=0xffffff
@@ -129,6 +135,8 @@ async def on_message(message):
                 await client.send_message(message.channel, embed=help_3_embed)
 
             if "{0.reaction.emoji}".format(res) == "⏰":
+                counter("시간 알려주기 관련 도움말을 출력합니다.")
+
                 help_4_embed = discord.Embed(
                     title="콱봇 도움말 :D",
                     color=0xffffff
@@ -147,6 +155,8 @@ async def on_message(message):
                 await client.send_message(message.channel, embed=help_4_embed)
 
             if "{0.reaction.emoji}".format(res) == "🔎":
+                counter("사이트 이동 관련 도움말을 출력합니다.")
+
                 help_5_embed = discord.Embed(
                     title="콱봇 도움말 :D",
                     color=0xffffff
@@ -163,6 +173,8 @@ async def on_message(message):
                 await client.send_message(message.channel, embed=help_5_embed)
 
             if "{0.reaction.emoji}".format(res) == "🎮":
+                counter("콱봇과 놀기 관련 도움말을 출력합니다.")
+
                 help_6_embed = discord.Embed(
                     title="콱봇 도움말 :D",
                     color=0xffffff
@@ -174,13 +186,15 @@ async def on_message(message):
                           "**콱봇 하나빼기** : "
                           "콱봇과 하나빼기를 합니다.\n"
                           "**콱봇 묵찌빠** : "
-                          "만들기 귀찮습니다."
+                          "개발 중입니다."
                     ,
                     inline=False
                 )
                 await client.send_message(message.channel, embed=help_6_embed)
 
             if "{0.reaction.emoji}".format(res) == "⚙":
+                counter("기타 도움말을 출력합니다.")
+
                 help_7_embed = discord.Embed(
                     title="콱봇 도움말 :D",
                     color=0xffffff
@@ -300,6 +314,7 @@ async def on_message(message):
     #     await client.send_message(message.channel, "그 친구는 죽었다구요...ㅠㅠ")
 
     if message.content == "콱봇 근육돼지":
+        counter("근육돼지에 대해 출력합니다.")
         await client.send_message(message.channel, "그 친구는 항상 먹고 있더라고요!")
 
         # 엔터테인먼트
@@ -458,6 +473,7 @@ async def on_message(message):
                 await client.send_message(message.channel, embed=site_embed)
 
     if message.content == "콱봇 사이트 목록":
+        counter("이동할 수 있는 사이트들의 목록을 출력합니다.")
         site_list_embed = discord.Embed(
             title="사이트 목록입니다.",
             description="네이버 naver\n"
@@ -643,21 +659,6 @@ async def on_message(message):
     #         title=mjb
     #     )
     #     await client.send_message(message.channel, embed=mjb_embed)
-
-
-
-
-
-    if message.content == "콱봇 테스트":
-        test_msg = await client.send_message(message.channel, "좋아요 싫어요")
-        await client.add_reaction(test_msg, "👍")
-        await client.add_reaction(test_msg, "👎")
-
-        def check(reaction, user):
-            e = str(reaction.emoji)
-            return e.startswith(("👍", "👎"))
-        test_res = await client.wait_for_reaction(message=test_msg, check=check, user=message.author)
-        await client.send_message(message.channel, "{0.user} (이)가 {0.reaction.emoji} 로 응답했습니다!".format(test_res))
 
         # 기타
     if message.content == "콱봇 프사":
