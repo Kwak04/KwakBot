@@ -42,98 +42,14 @@ async def on_message(message):
     # 도움말
     help_keyword = ["콱봇 도와줘", "콱봇 도움말", "콱봇 도움", "콱봇 help"]
     if message.content in help_keyword:
-        counter("도움말을 출력합니다.")
-
         help_embed = discord.Embed(
-            title="콱봇 도움말 :D",
-            description="콱봇을 사용하는 방법에 대해서 설명합니다.",
-            color=0xffffff
-        )
-        help_embed.add_field(
-            name="도움말 보기",
-            value="**콱봇 도와줘** or **콱봇 도움말** or **콱봇 help** : \n"
-            "총 3가지의 방법으로 도움말을 불러오실 수 있습니다."
-            ,
-            inline=False
-        )
-        help_embed.add_field(
-            name="엔터테인먼트",
-            value="**콱봇 사로** or **콱봇 saro** : "
-            "루프스테이션의 신 Saro의 영상을 보실 수 있습니다."
-            ,
-            inline=False
-        )
-        help_embed.add_field(
-            name="선택하기",
-            value="**콱봇 선택** a b c or **콱봇 골라** a b c: "
-            "a, b, c 중 하나를 콱봇이 선택합니다."
-            ,
-            inline=False
-        )
-        help_embed.add_field(
-            name="번역하기",
-            value="**콱봇 한영번역** 어쩌구저쩌구 : "
-            "입력한 한국어를 영어로 번역합니다.\n"
-            "**콱봇 영한번역** blahblah : "
-            "입력한 영어를 한국어로 번역합니다."
-            ,
-            inline=False
-        )
-        help_embed.add_field(
-            name="시간 알려주기",
-            value="**콱봇 시간** : "
-            "현재 시간을 출력합니다.\n"
-            "**콱봇 날짜** : "
-            "오늘 날짜를 출력합니다.\n"
-            "**콱봇 시간날짜** : "
-            "시간과 날짜를 동시에 출력합니다."
-            ,
-            inline=False
-        )
-        help_embed.add_field(
-            name="사이트 이동",
-            value="**콱봇 사이트 site** : "
-            "특정 사이트로 이동하는 링크를 출력합니다.\nex) 콱봇 사이트 네이버 or naver (한/영 상관없음)\n"
-            "**콱봇 사이트 목록** : "
-            "이동할 수 있는 사이트 목록을 확인할 수 있습니다."
-        )
-        help_embed.add_field(
-            name="콱봇과 놀기",
-            value="**콱봇 가위바위보** : "
-            "콱봇과 가위바위보를 합니다.\n"
-            "**콱봇 하나빼기** : "
-            "콱봇과 하나빼기를 합니다.\n"
-            "**콱봇 묵찌빠** : "
-            "만들기 귀찮습니다."
-            ,
-            inline=False
-        )
-        help_embed.add_field(
-            name="기타",
-            value="**콱봇 프사** : "
-            "콱봇의 프로필 사진을 보여줍니다.",
-            inline=False
-        )
-        help_embed.set_thumbnail(
-            url="https://cdn.discordapp.com/attachments/547642671460515841/551420106585145359/awesome_face.png"
-        )
-        help_embed.set_footer(
-            text="by Tronix (도움말 리뉴얼 중입니다.)",
-            icon_url="https://cdn.discordapp.com/attachments/547642671460515841/549600907700994050/KakaoTalk_20190127_152958900.jpg"
-        )
-        await client.send_message(message.channel, embed=help_embed)
-
-    if message.content == "콱봇 베타":
-        # TODO 버튼식으로 넘어가게 만들기
-
-        help_beta_embed = discord.Embed(
             title="콱봇 도움말 :D",
             description="콱봇을 사용하는 방법에 대해서 설명합니다.\n"
                         "**콱봇 도와줘** or **콱봇 도움말** or **콱봇 help**\n"
                         "위의 3가지 방법으로 도움말을 불러오실 수 있습니다.",
             color=0xffffff
         )
-        help_beta_embed.add_field(
+        help_embed.add_field(
             name="아래 이모지들을 눌러 관련 도움말을 펼치세요.",
             value=":clapper: 1. 엔터테인먼트\n"
             ":slot_machine: 2. 선택하기\n"
@@ -143,14 +59,14 @@ async def on_message(message):
             ":video_game: 6. 콱봇과 놀기\n"
             ":gear: 7. 기타"
         )
-        help_beta_embed.set_thumbnail(
+        help_embed.set_thumbnail(
             url="https://cdn.discordapp.com/attachments/547642671460515841/551420106585145359/awesome_face.png"
         )
-        help_beta_embed.set_footer(
+        help_embed.set_footer(
             text="by Tronix",
             icon_url="https://cdn.discordapp.com/attachments/547642671460515841/549600907700994050/KakaoTalk_20190127_152958900.jpg"
         )
-        await client.send_message(message.channel, embed=help_beta_embed)
+        await client.send_message(message.channel, embed=help_embed)
 
         help_msg = await client.send_message(message.channel, "▼")
         await client.add_reaction(help_msg, "🎬")
@@ -169,31 +85,114 @@ async def on_message(message):
             res = await client.wait_for_reaction(message=help_msg, check=check, user=message.author)
 
             if "{0.reaction.emoji}".format(res) == "🎬":
-                await client.send_message(message.channel, "응 엔터테인먼트야~")
+                help_1_embed = discord.Embed(
+                    title="콱봇 도움말 :D",
+                    color=0xffffff
+                )
+                help_1_embed.add_field(
+                    name="엔터테인먼트 🎬",
+                    value="**콱봇 사로** or **콱봇 saro** : "
+                          "루프스테이션의 신 Saro의 영상을 보실 수 있습니다."
+                    ,
+                    inline=False
+                )
+                await client.send_message(message.channel, embed=help_1_embed)
 
             if "{0.reaction.emoji}".format(res) == "🎰":
-                await client.send_message(message.channel, "응 선택하기야~")
+                help_2_embed = discord.Embed(
+                    title="콱봇 도움말 :D",
+                    color=0xffffff
+                )
+                help_2_embed.add_field(
+                    name="선택하기 🎰",
+                    value="**콱봇 선택** a b c or **콱봇 골라** a b c : "
+                          "a, b, c 중 하나를 콱봇이 선택합니다."
+                    ,
+                    inline=False
+                )
+                await client.send_message(message.channel, embed=help_2_embed)
 
             if "{0.reaction.emoji}".format(res) == "📔":
-                await client.send_message(message.channel, "응 번역하기야~")
+                help_3_embed = discord.Embed(
+                    title="콱봇 도움말 :D",
+                    color=0xffffff
+                )
+                help_3_embed.add_field(
+                    name="번역하기 📔",
+                    value="**콱봇 한영번역** 어쩌구저쩌구 : "
+                          "입력한 한국어를 영어로 번역합니다.\n"
+                          "**콱봇 영한번역** blahblah : "
+                          "입력한 영어를 한국어로 번역합니다."
+                    ,
+                    inline=False
+                )
+                await client.send_message(message.channel, embed=help_3_embed)
 
             if "{0.reaction.emoji}".format(res) == "⏰":
-                await client.send_message(message.channel, "응 시간 알려주기야~")
+                help_4_embed = discord.Embed(
+                    title="콱봇 도움말 :D",
+                    color=0xffffff
+                )
+                help_4_embed.add_field(
+                    name="시간 알려주기 ⏰",
+                    value="**콱봇 시간** : "
+                          "현재 시간을 출력합니다.\n"
+                          "**콱봇 날짜** : "
+                          "오늘 날짜를 출력합니다.\n"
+                          "**콱봇 시간날짜** : "
+                          "시간과 날짜를 동시에 출력합니다."
+                    ,
+                    inline=False
+                )
+                await client.send_message(message.channel, embed=help_4_embed)
 
             if "{0.reaction.emoji}".format(res) == "🔎":
-                await client.send_message(message.channel, "응 사이트 이동야~")
+                help_5_embed = discord.Embed(
+                    title="콱봇 도움말 :D",
+                    color=0xffffff
+                )
+                help_5_embed.add_field(
+                    name="사이트 이동 🔎",
+                    value="**콱봇 사이트 site** : "
+                          "특정 사이트로 이동하는 링크를 출력합니다.\nex) 콱봇 사이트 네이버 or naver (한/영 상관없음)\n"
+                          "**콱봇 사이트 목록** : "
+                          "이동할 수 있는 사이트 목록을 확인할 수 있습니다."
+                    ,
+                    inline=False
+                )
+                await client.send_message(message.channel, embed=help_5_embed)
 
             if "{0.reaction.emoji}".format(res) == "🎮":
-                await client.send_message(message.channel, "응 콱봇과 놀기야~")
+                help_6_embed = discord.Embed(
+                    title="콱봇 도움말 :D",
+                    color=0xffffff
+                )
+                help_6_embed.add_field(
+                    name="콱봇과 놀기 🎮",
+                    value="**콱봇 가위바위보** : "
+                          "콱봇과 가위바위보를 합니다.\n"
+                          "**콱봇 하나빼기** : "
+                          "콱봇과 하나빼기를 합니다.\n"
+                          "**콱봇 묵찌빠** : "
+                          "만들기 귀찮습니다."
+                    ,
+                    inline=False
+                )
+                await client.send_message(message.channel, embed=help_6_embed)
 
             if "{0.reaction.emoji}".format(res) == "⚙":
-                await client.send_message(message.channel, "응 기타야~")
-
-        # def check(reaction, user):
-        #     e = str(reaction.emoji)
-        #     return e.startswith(("👍", "👎"))
-        # help_res = await client.wait_for_reaction(message=help_msg, check=check, user=message.author)
-        # print(help_res)
+                help_7_embed = discord.Embed(
+                    title="콱봇 도움말 :D",
+                    color=0xffffff
+                )
+                help_7_embed.add_field(
+                    name="기타 ⚙",
+                    value="**콱봇 프사** : "
+                          "콱봇의 프로필 사진을 보여줍니다."
+                    ,
+                    inline=False
+                )
+                await client.send_message(message.channel, embed=help_7_embed)
 
     # 일상대화 (접두사(콱봇) 없음)
     if message.content == "콱봇":
