@@ -186,7 +186,9 @@ async def on_message(message):
                           "**콱봇 하나빼기** : "
                           "콱봇과 하나빼기를 합니다.\n"
                           "**콱봇 묵찌빠** : "
-                          "개발 중입니다."
+                          "개발 중입니다.\n"
+                          "**콱봇 업앤다운** : "
+                          "콱봇과 UP AND DOWN 게임을 합니다."
                     ,
                     inline=False
                 )
@@ -394,7 +396,7 @@ async def on_message(message):
         now = datetime.now()
         time_embed = discord.Embed(
             title="현재 시간은...",
-            description="**%d시 %d분 %d초**입니다!" % (abs(now.hour - 12), now.minute, now.second),
+            description="**%d시 %02d분 %02d초**입니다!" % (abs(now.hour - 12), now.minute, now.second),
             color=0xffff00
         )
         await client.send_message(message.channel, embed=time_embed)
@@ -414,7 +416,7 @@ async def on_message(message):
         now = datetime.now()
         timedate_embed = discord.Embed(
             title="지금은...",
-            description="**%d년 %d월 %d일\n%d시 %d분 %d초**입니다!"
+            description="**%d년 %d월 %d일\n%d시 %02d분 %02d초**입니다!"
                         % (now.year, now.month, now.day, abs(now.hour - 12), now.minute, now.second),
             color=0xffff00
         )
@@ -660,10 +662,55 @@ async def on_message(message):
     #     )
     #     await client.send_message(message.channel, embed=mjb_embed)
 
+        # UP AND DOWN
+    if message.content == "콱봇 업앤다운":
+        counter("UP AND DOWN 게임을 합니다.")
+        # TODO 업앤다운 완성
+
+        ud_com = random.randint(1, 100)
+        ud_user = 0
+        ud_count = 0
+
+        while ud_com != ud_user:
+            ud_count += 1
+            await client.send_message(message.channel, "컴퓨터가 선택하는 1부터 100까지의 숫자를 맞춰보세요!")
+            ud_user = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
+
+            if ud_user is None:
+                ud_error_embed = discord.Embed(
+                    title="시간 초과입니다.",
+                    description="끝!",
+                    color=0xff0000
+                )
+                await client.send_message(message.channel, embed=ud_error_embed)
+                break
+
+            ud_user = int(ud_user.content)
+
+            if ud_user > ud_com:
+                ud_count_embed = discord.Embed(
+                    title="UP!",
+                    description="시도 횟수: %d" % count
+                )
+                await client.send_message(message.channel, embed=ud_count_embed)
+            if ud_user < ud_com:
+                ud_count_embed = discord.Embed(
+                    title="DOWN!",
+                    description="시도 횟수: %d" % count
+                )
+                await client.send_message(message.channel, embed=ud_count_embed)
+
+        ud_result_embed = discord.Embed(
+            title="게임이 끝났습니다!",
+            description="총 시도 횟수: %d" % count
+        )
+        await client.send_message(message.channel, embed=ud_result_embed)
+
         # 기타
     if message.content == "콱봇 프사":
         counter("프로필 사진을 출력합니다.")
         bot_picture = "https://cdn.discordapp.com/attachments/547642671460515841/550260106751639554/awesome_face.png"
         await client.send_message(message.channel, "제 사진이에요!\n%s" % bot_picture)
+
 
 client.run(token)
