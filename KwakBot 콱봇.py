@@ -32,6 +32,8 @@ async def on_ready():
 @client.event
 async def on_message(message):
 
+    channel = message.channel
+
     if message.author.bot:
         return None
 
@@ -70,9 +72,9 @@ async def on_message(message):
             text="Tronix",
             icon_url="https://cdn.discordapp.com/attachments/547642671460515841/549600907700994050/KakaoTalk_20190127_152958900.jpg"
         )
-        await client.send_message(message.channel, embed=help_embed)
+        await channel.send(message.channel, embed=help_embed)
 
-        help_msg = await client.send_message(message.channel, "▼")
+        help_msg = await channel.send(message.channel, "▼")
         await client.add_reaction(help_msg, "🎬")
         await client.add_reaction(help_msg, "🎰")
         await client.add_reaction(help_msg, "📔")
@@ -102,7 +104,7 @@ async def on_message(message):
                     ,
                     inline=False
                 )
-                await client.send_message(message.channel, embed=help_1_embed)
+                await channel.send(message.channel, embed=help_1_embed)
 
             if "{0.reaction.emoji}".format(res) == "🎰":
                 counter("선택하기 관련 도움말을 출력합니다.")
@@ -118,7 +120,7 @@ async def on_message(message):
                     ,
                     inline=False
                 )
-                await client.send_message(message.channel, embed=help_2_embed)
+                await channel.send(message.channel, embed=help_2_embed)
 
             if "{0.reaction.emoji}".format(res) == "📔":
                 help_3_embed = discord.Embed(
@@ -134,7 +136,7 @@ async def on_message(message):
                     ,
                     inline=False
                 )
-                await client.send_message(message.channel, embed=help_3_embed)
+                await channel.send(message.channel, embed=help_3_embed)
 
             if "{0.reaction.emoji}".format(res) == "⏰":
                 counter("시간 알려주기 관련 도움말을 출력합니다.")
@@ -154,7 +156,7 @@ async def on_message(message):
                     ,
                     inline=False
                 )
-                await client.send_message(message.channel, embed=help_4_embed)
+                await channel.send(message.channel, embed=help_4_embed)
 
             if "{0.reaction.emoji}".format(res) == "🔎":
                 counter("사이트 이동 관련 도움말을 출력합니다.")
@@ -172,7 +174,7 @@ async def on_message(message):
                     ,
                     inline=False
                 )
-                await client.send_message(message.channel, embed=help_5_embed)
+                await channel.send(message.channel, embed=help_5_embed)
 
             if "{0.reaction.emoji}".format(res) == "🎮":
                 counter("콱봇과 놀기 관련 도움말을 출력합니다.")
@@ -194,7 +196,7 @@ async def on_message(message):
                     ,
                     inline=False
                 )
-                await client.send_message(message.channel, embed=help_6_embed)
+                await channel.send(message.channel, embed=help_6_embed)
 
             if "{0.reaction.emoji}".format(res) == "⚙":
                 counter("기타 도움말을 출력합니다.")
@@ -210,62 +212,62 @@ async def on_message(message):
                     ,
                     inline=False
                 )
-                await client.send_message(message.channel, embed=help_7_embed)
+                await channel.send(message.channel, embed=help_7_embed)
 
     # 일상대화 (접두사(콱봇) 없음)
     if message.content == "콱봇":
         counter("콱봇이 대답합니다.")
-        await client.send_message(message.channel, random.choice(["네?", "저 부르셨어요?", "왜요?"]))
+        await channel.send(message.channel, random.choice(["네?", "저 부르셨어요?", "왜요?"]))
 
     if message.content == "콱봇 안녕":
         counter("콱봇이 인사합니다.")
-        await client.send_message(message.channel, "안녕하세요 :D")
+        await channel.send(message.channel, "안녕하세요 :D")
         
     if message.content == "콱봇 ㅎㅇ":
         counter("콱봇이 인사합니다.")
-        await client.send_message(message.channel, "ㅎㅇ염 ㅎㅎ")
+        await channel.send(message.channel, "ㅎㅇ염 ㅎㅎ")
 
         # 반응
     # if message.content.startswith("ㅋㅋㅋㅋㅋㅋ") or message.content.endswith("ㅋㅋㅋㅋㅋㅋ"):
     #     counter("콱봇이 따라 웃습니다.")
-    #     await client.send_message(message.channel, "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ")
+    #     await channel.send(message.channel, "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ")
     #
     # if message.content.startswith("??") or message.content.endswith("??"):
     #     counter("콱봇이 물음표를 띄웁니다.")
-    #     await client.send_message(message.channel, "???")
+    #     await channel.send(message.channel, "???")
 
     if message.content == "!!":
         counter("..!!!")
-        await client.send_message(message.channel, "..!!!")
+        await channel.send(message.channel, "..!!!")
 
     if message.content == "ㅇㅋ":
         counter("오께이 좋아유~")
-        await client.send_message(message.channel, "오께이 좋아유~")
+        await channel.send(message.channel, "오께이 좋아유~")
 
     if "ㅠ" in message.content:
         counter("ㅠㅠ")
-        await client.send_message(message.channel, "ㅠㅠ")
+        await channel.send(message.channel, "ㅠㅠ")
 
     if message.content == "엉":
         counter("엉? 덩이")
-        await client.send_message(message.channel, "덩이")
+        await channel.send(message.channel, "덩이")
 
     if "앙" in message.content:
         counter("앙기모띠")
-        await client.send_message(message.channel, "앙기모띠")
+        await channel.send(message.channel, "앙기모띠")
 
     # 대답
     if message.content == "잘자":
         counter("콱봇이 인사합니다.")
-        await client.send_message(message.channel, "안녕히 주무세요~")
+        await channel.send(message.channel, "안녕히 주무세요~")
 
     if message.content.endswith("올게"):
         counter("콱봇이 인사합니다.")
-        await client.send_message(message.channel, "다녀오세요~")
+        await channel.send(message.channel, "다녀오세요~")
 
     if message.content.startswith("갔다"):
         counter("콱봇이 인사합니다.")
-        await client.send_message(message.channel, "다녀오셨어요?")
+        await channel.send(message.channel, "다녀오셨어요?")
 
         # 욕 감지
     words = ["씨발", "시발", "ㅅㅂ", "좆", "병신", "ㅄ", "ㅂㅅ", "쌍", "썅", "ㅆ", "새끼"]
@@ -277,49 +279,49 @@ async def on_message(message):
             except:
                 pass
             else:
-                await client.send_message(message.channel, "<@%s>님 욕하지 마세요~~^^" % message.author.id)
+                await channel.send(message.channel, "<@%s>님 욕하지 마세요~~^^" % message.author.id)
 
     # 정보 (접두사(콱봇) 있음)
         # 인물정보
     if message.content == "콱봇 최연욱":
         counter("최연욱은 무엇일까")
-        await client.send_message(message.channel, random.choice(["바부", "부바", "어부바"]))
+        await channel.send(message.channel, random.choice(["바부", "부바", "어부바"]))
 
     if message.content == "콱봇 곽현민":
         counter("곽현민?")
-        await client.send_message(message.channel, "그게 누구죠;;")
+        await channel.send(message.channel, "그게 누구죠;;")
 
     if message.content == "콱봇 안현빈":
         counter("안현빈은 무엇일까")
-        await client.send_message(message.channel, "아 그 통통하신 분?")
+        await channel.send(message.channel, "아 그 통통하신 분?")
 
     if message.content == "콱봇 Tronix" or message.content == "콱봇 tronix" or message.content == "콱봇 트로닉스":
         counter("개발자에 대해 출력합니다.")
-        await client.send_message(message.channel, "저를 만든 사람이라고 하네요!")
+        await channel.send(message.channel, "저를 만든 사람이라고 하네요!")
 
     if message.content == "콱봇 Rio" or message.content == "콱봇 rio" or message.content == "콱봇 리오":
         counter("Rio에 대해 출력합니다.")
-        await client.send_message(message.channel, "제 친구 기어봇의 개발자입니다!")
+        await channel.send(message.channel, "제 친구 기어봇의 개발자입니다!")
 
     if message.content == "콱봇 굴굴이":
         counter("굴굴이에 대해 출력합니다.")
-        await client.send_message(message.channel, "제 친구 근육돼지의 개발자입니다!")
+        await channel.send(message.channel, "제 친구 근육돼지의 개발자입니다!")
 
     if message.content == "콱봇 오리":
         counter("Rio에 대해 반대로 출력합니다.")
-        await client.send_message(message.channel, "!다니입자발개 의봇킹띵 구친 제")
+        await channel.send(message.channel, "!다니입자발개 의봇킹띵 구친 제")
 
     if message.content == "콱봇 기어봇":
         counter("기어봇에 대해 출력합니다.")
-        await client.send_message(message.channel, "제 친구이자 제 개발자의 친구의 봇입니다!")
+        await channel.send(message.channel, "제 친구이자 제 개발자의 친구의 봇입니다!")
 
     # if "지뢰봇" in message.content:
     #     counter("지뢰봇에 대해 출력합니다.")
-    #     await client.send_message(message.channel, "그 친구는 죽었다구요...ㅠㅠ")
+    #     await channel.send(message.channel, "그 친구는 죽었다구요...ㅠㅠ")
 
     if message.content == "콱봇 근육돼지":
         counter("근육돼지에 대해 출력합니다.")
-        await client.send_message(message.channel, "그 친구는 항상 먹고 있더라고요!")
+        await channel.send(message.channel, "그 친구는 항상 먹고 있더라고요!")
 
         # 엔터테인먼트
     if message.content == "콱봇 사로" or message.content == "콱봇 saro":
@@ -333,7 +335,7 @@ async def on_message(message):
         saro4 = "Saro의 곡 중 하나인 **PIEGE**입니다!\n" \
                 "https://www.youtube.com/watch?v=mYGYh62Sgpo"
         saro = random.choice([saro1, saro2, saro3, saro4])
-        await client.send_message(message.channel, saro)
+        await channel.send(message.channel, saro)
 
         # 실용적인 기능
         # 선택
@@ -351,7 +353,7 @@ async def on_message(message):
                 description=choose_result,
                 color=0xffff00
             )
-            await client.send_message(message.channel, embed=choose_embed)
+            await channel.send(message.channel, embed=choose_embed)
 
         # 번역
     if message.content.startswith("콱봇 한영번역"):
@@ -371,7 +373,7 @@ async def on_message(message):
             description=result["message"]["result"]["translatedText"],
             color=0x00ffff
         )
-        await client.send_message(message.channel, embed=trans_ke_embed)
+        await channel.send(message.channel, embed=trans_ke_embed)
 
     if message.content.startswith("콱봇 영한번역"):
         counter("영어에서 한국어로 번역합니다.")
@@ -390,7 +392,7 @@ async def on_message(message):
             description=result["message"]["result"]["translatedText"],
             color=0x00ffff
         )
-        await client.send_message(message.channel, embed=trans_ek_embed)
+        await channel.send(message.channel, embed=trans_ek_embed)
 
         # 시간
     if message.content == "콱봇 시간":
@@ -401,7 +403,7 @@ async def on_message(message):
             description="**%d시 %02d분 %02d초**입니다!" % (abs(now.hour - 12), now.minute, now.second),
             color=0xffff00
         )
-        await client.send_message(message.channel, embed=time_embed)
+        await channel.send(message.channel, embed=time_embed)
 
     if message.content == "콱봇 날짜":
         counter("날짜를 출력합니다.")
@@ -411,7 +413,7 @@ async def on_message(message):
             description="**%d년 %d월 %d일**입니다!" % (now.year, now.month, now.day),
             color=0xffff00
         )
-        await client.send_message(message.channel, embed=date_embed)
+        await channel.send(message.channel, embed=date_embed)
 
     if message.content == "콱봇 시간날짜":
         counter("시간과 날짜를 출력합니다.")
@@ -422,7 +424,7 @@ async def on_message(message):
                         % (now.year, now.month, now.day, abs(now.hour - 12), now.minute, now.second),
             color=0xffff00
         )
-        await client.send_message(message.channel, embed=timedate_embed)
+        await channel.send(message.channel, embed=timedate_embed)
 
         # 사이트 이동
     if message.content.startswith("콱봇 사이트"):
@@ -446,35 +448,35 @@ async def on_message(message):
 
             if site == "네이버" or site == "naver":
                 site_embed = createSiteEmbed("네이버", "https://www.naver.com/", "https://media.discordapp.net/attachments/554154900020396033/554291327181783062/mobile_212852414260.png")
-                await client.send_message(message.channel, embed=site_embed)
+                await channel.send(message.channel, embed=site_embed)
 
             if site == "구글" or site == "google":
                 site_embed = createSiteEmbed("Google", "https://www.google.com/", "https://media.discordapp.net/attachments/554154900020396033/554301508834033664/AAuE7mAOzJeUhnaCQpCrB8z58jvoroZFpAAB_9nD7ws900-mo-c-c0xffffffff-rj-k-no.png")
-                await client.send_message(message.channel, embed=site_embed)
+                await channel.send(message.channel, embed=site_embed)
 
             if site == "다음" or site == "daum":
                 site_embed = createSiteEmbed("다음", "https://www.daum.net/", "https://media.discordapp.net/attachments/554154900020396033/554295052411863050/5587C4E4012FCD0001.png")
-                await client.send_message(message.channel, embed=site_embed)
+                await channel.send(message.channel, embed=site_embed)
 
             if site == "유튜브" or site == "youtube":
                 site_embed = createSiteEmbed("YouTube", "https://www.youtube.com/", "https://media.discordapp.net/attachments/554154900020396033/554296606158094366/yt_1200-vfl4C3T0K.png")
-                await client.send_message(message.channel, embed=site_embed)
+                await channel.send(message.channel, embed=site_embed)
 
             if site == "깃허브" or site == "github":
                 site_embed = createSiteEmbed("GitHub", "https://www.github.com/", "https://cdn.discordapp.com/attachments/554154900020396033/554319935480922112/9919.png")
-                await client.send_message(message.channel, embed=site_embed)
+                await channel.send(message.channel, embed=site_embed)
 
             if site == "사운드클라우드" or site == "soundcloud":
                 site_embed = createSiteEmbed("SoundCloud", "https://soundcloud.com/discover", "https://cdn.discordapp.com/attachments/554154900020396033/554321777866702872/u4Xt7sb8_400x400.png")
-                await client.send_message(message.channel, embed=site_embed)
+                await channel.send(message.channel, embed=site_embed)
 
             if site == "페이스북" or site == "facebook":
                 site_embed = createSiteEmbed("Facebook", "https://www.facebook.com", "https://cdn.discordapp.com/attachments/554154900020396033/554322603763040270/fb_icon_325x325.png")
-                await client.send_message(message.channel, embed=site_embed)
+                await channel.send(message.channel, embed=site_embed)
 
             if site == "해시코드" or site == "hashcode":
                 site_embed = createSiteEmbed("Hashcode", "https://hashcode.co.kr/", "https://cdn.discordapp.com/attachments/554324092313141268/554325207968645133/ic_meta-d75a4fdc9eacdac15ab7d016ee69babf6aff049b1fc80a55f86dad5560da2cee.png")
-                await client.send_message(message.channel, embed=site_embed)
+                await channel.send(message.channel, embed=site_embed)
 
     if message.content == "콱봇 사이트 목록":
         counter("이동할 수 있는 사이트들의 목록을 출력합니다.")
@@ -490,14 +492,14 @@ async def on_message(message):
             "해시코드 hashcode",
             color=0xffffff
         )
-        await client.send_message(message.channel, embed=site_list_embed)
+        await channel.send(message.channel, embed=site_list_embed)
 
         # 콱봇과 놀기
         # 가위바위보
     if message.content.startswith("콱봇 가위바위보"):
         counter("콱봇과 가위바위보를 합니다.")
 
-        await client.send_message(message.channel, "가위바위보 중에 고르세요!")
+        await channel.send(message.channel, "가위바위보 중에 고르세요!")
         gbb_user = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
 
         if gbb_user is None:
@@ -506,7 +508,7 @@ async def on_message(message):
                 description="왜 안 고르세요? :(",
                 color=0xff0000
             )
-            await client.send_message(message.channel, embed=gbb_timeover_embed)
+            await channel.send(message.channel, embed=gbb_timeover_embed)
 
         else:
             gbb_user = gbb_user.content
@@ -527,7 +529,7 @@ async def on_message(message):
                 description=gbb,
                 color=0xffff00
             )
-            await client.send_message(message.channel, embed=gbb_embed)
+            await channel.send(message.channel, embed=gbb_embed)
 
         # 하나빼기
     if message.content.startswith("콱봇 하나빼기"):
@@ -535,7 +537,7 @@ async def on_message(message):
 
         while True:
 
-            await client.send_message(message.channel, "일단 먼저 가위바위보 중에 2개를 골라주세요! (공백 구분)")
+            await channel.send(message.channel, "일단 먼저 가위바위보 중에 2개를 골라주세요! (공백 구분)")
             hnp_user_input = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
 
             if hnp_user_input is None:
@@ -544,7 +546,7 @@ async def on_message(message):
                     description="왜 안 고르세요? :(",
                     color=0xff0000
                 )
-                client.send_message(message.channel, embed=hnp_timeover_embed_middle)
+                channel.send(message.channel, embed=hnp_timeover_embed_middle)
 
             else:
                 hnp_user_input = hnp_user_input.content.split()
@@ -557,7 +559,7 @@ async def on_message(message):
                         description="<@%s>님이 진 걸로 ㅎㅎ" % message.author.id,
                         color=0xff0000
                     )
-                    await client.send_message(message.channel, embed=hnp_error_embed)
+                    await channel.send(message.channel, embed=hnp_error_embed)
                     break
                 hnp_list = ["가위", "바위", "보"]
                 hnp_com1, hnp_com2 = 0, 0
@@ -568,7 +570,7 @@ async def on_message(message):
                     title="%s와 %s 중에 무엇을 내시겠어요?" % (hnp_user1, hnp_user2),
                     description="콱봇 : %s  %s\n당신 : %s  %s" % (hnp_com1, hnp_com2, hnp_user1, hnp_user2)
                 )
-                await client.send_message(message.channel, embed=hnp_embed_middle)
+                await channel.send(message.channel, embed=hnp_embed_middle)
 
                 hnp_user = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
 
@@ -578,7 +580,7 @@ async def on_message(message):
                         description="왜 안 고르세요? :(",
                         color=0xff0000
                     )
-                    await client.send_message(message.channel, embed=hnp_timeover_embed)
+                    await channel.send(message.channel, embed=hnp_timeover_embed)
                     break
                 else:
                     hnp_user = hnp_user.content
@@ -598,7 +600,7 @@ async def on_message(message):
                         description=hnp,
                         color=0xffff00
                     )
-                    await client.send_message(message.channel, embed=hnp_embed)
+                    await channel.send(message.channel, embed=hnp_embed)
                     break
 
     #     # 묵찌빠
@@ -608,7 +610,7 @@ async def on_message(message):
     #
     #
     #     while True:
-    #         await client.send_message(message.channel, "묵찌빠 중 하나를 골라주세요!")
+    #         await channel.send(message.channel, "묵찌빠 중 하나를 골라주세요!")
     #         mjb_user = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
     #
     #         if mjb_user is None:
@@ -617,7 +619,7 @@ async def on_message(message):
     #                 description="왜 안 고르세요? :(",
     #                 color=0xff0000
     #             )
-    #             client.send_message(message.channel, embed=mjb_timeover_embed)
+    #             channel.send(message.channel, embed=mjb_timeover_embed)
     #
     #         else:
     #             mjb_attack, mjb_user_, mjb_count, mjb_attack, mjb = 0, 0, 0, 0, 0
@@ -636,7 +638,7 @@ async def on_message(message):
     #                 title=whattosay(mjb_count, mjb_user_, mjb_user) + " 무엇을 내시겠어요?",
     #                 description="컴퓨터 : %s\n당신    : %s" % (mjb_com, mjb_user)
     #             )
-    #             await client.send_message(message.channel, embed=mjb_middle_embed)
+    #             await channel.send(message.channel, embed=mjb_middle_embed)
     #
     #             # 같은 것을 냈을 때
     #             if mjb_user == mjb_com:
@@ -664,7 +666,7 @@ async def on_message(message):
     #     mjb_embed = discord.Embed(
     #         title=mjb
     #     )
-    #     await client.send_message(message.channel, embed=mjb_embed)
+    #     await channel.send(message.channel, embed=mjb_embed)
 
     #     # UP AND DOWN
     # if message.content == "콱봇 업앤다운":
@@ -676,7 +678,7 @@ async def on_message(message):
     #     ud_count = 0
     #     ud_error = 0
     #
-    #     await client.send_message(message.channel, "컴퓨터가 선택하는 1부터 100까지의 숫자를 맞춰보세요!")
+    #     await channel.send(message.channel, "컴퓨터가 선택하는 1부터 100까지의 숫자를 맞춰보세요!")
     #
     #     while ud_com != ud_user:
     #         ud_count += 1
@@ -689,7 +691,7 @@ async def on_message(message):
     #                 description="게임 끝!",
     #                 color=0xff0000
     #             )
-    #             await client.send_message(message.channel, embed=ud_timeover_embed)
+    #             await channel.send(message.channel, embed=ud_timeover_embed)
     #             break
     #
     #         try:
@@ -701,7 +703,7 @@ async def on_message(message):
     #                 description="게임 끝!",
     #                 color=0xff0000
     #             )
-    #             await client.send_message(message.channel, embed=ud_error_embed)
+    #             await channel.send(message.channel, embed=ud_error_embed)
     #             break
     #         else:
     #             if ud_user not in range(1, 101):
@@ -711,7 +713,7 @@ async def on_message(message):
     #                     description="게임 끝!",
     #                     color=0xff0000
     #                 )
-    #                 await client.send_message(message.channel, embed=ud_error_embed)
+    #                 await channel.send(message.channel, embed=ud_error_embed)
     #                 break
     #
     #
@@ -721,13 +723,13 @@ async def on_message(message):
     #                     title="UP!",
     #                     description="시도 횟수: %d" % ud_count
     #                 )
-    #                 await client.send_message(message.channel, embed=ud_count_embed)
+    #                 await channel.send(message.channel, embed=ud_count_embed)
     #             if ud_user < ud_com:
     #                 ud_count_embed = discord.Embed(
     #                     title="DOWN!",
     #                     description="시도 횟수: %d" % ud_count
     #                 )
-    #                 await client.send_message(message.channel, embed=ud_count_embed)
+    #                 await channel.send(message.channel, embed=ud_count_embed)
     #
     #         if ud_error == 0:
     #             ud_result_embed = discord.Embed(
@@ -766,9 +768,9 @@ async def on_message(message):
     #             text="Tronix",
     #             icon_url="https://cdn.discordapp.com/attachments/547642671460515841/549600907700994050/KakaoTalk_20190127_152958900.jpg"
     #         )
-    #         await client.send_message(message.channel, embed=help_embed)
+    #         await channel.send(message.channel, embed=help_embed)
     #
-    #         help_msg = await client.send_message(message.channel, "▼")
+    #         help_msg = await channel.send(message.channel, "▼")
     #         await client.add_reaction(help_msg, "🎬")
     #         await client.add_reaction(help_msg, "🎰")
     #         await client.add_reaction(help_msg, "📔")
@@ -798,7 +800,7 @@ async def on_message(message):
     #                     ,
     #                     inline=False
     #                 )
-    #                 await client.send_message(message.channel, embed=help_1_embed)
+    #                 await channel.send(message.channel, embed=help_1_embed)
     #
     #             if "{0.reaction.emoji}".format(res) == "🎰":
     #                 counter("선택하기 관련 도움말을 출력합니다.")
@@ -814,7 +816,7 @@ async def on_message(message):
     #                     ,
     #                     inline=False
     #                 )
-    #                 await client.send_message(message.channel, embed=help_2_embed)
+    #                 await channel.send(message.channel, embed=help_2_embed)
     #
     #             if "{0.reaction.emoji}".format(res) == "📔":
     #                 help_3_embed = discord.Embed(
@@ -830,7 +832,7 @@ async def on_message(message):
     #                     ,
     #                     inline=False
     #                 )
-    #                 await client.send_message(message.channel, embed=help_3_embed)
+    #                 await channel.send(message.channel, embed=help_3_embed)
     #
     #             if "{0.reaction.emoji}".format(res) == "⏰":
     #                 counter("시간 알려주기 관련 도움말을 출력합니다.")
@@ -850,7 +852,7 @@ async def on_message(message):
     #                     ,
     #                     inline=False
     #                 )
-    #                 await client.send_message(message.channel, embed=help_4_embed)
+    #                 await channel.send(message.channel, embed=help_4_embed)
     #
     #             if "{0.reaction.emoji}".format(res) == "🔎":
     #                 counter("사이트 이동 관련 도움말을 출력합니다.")
@@ -868,7 +870,7 @@ async def on_message(message):
     #                     ,
     #                     inline=False
     #                 )
-    #                 await client.send_message(message.channel, embed=help_5_embed)
+    #                 await channel.send(message.channel, embed=help_5_embed)
     #
     #             if "{0.reaction.emoji}".format(res) == "🎮":
     #                 counter("콱봇과 놀기 관련 도움말을 출력합니다.")
@@ -890,7 +892,7 @@ async def on_message(message):
     #                     ,
     #                     inline=False
     #                 )
-    #                 await client.send_message(message.channel, embed=help_6_embed)
+    #                 await channel.send(message.channel, embed=help_6_embed)
     #
     #             if "{0.reaction.emoji}".format(res) == "⚙":
     #                 counter("기타 도움말을 출력합니다.")
@@ -906,62 +908,62 @@ async def on_message(message):
     #                     ,
     #                     inline=False
     #                 )
-    #                 await client.send_message(message.channel, embed=help_7_embed)
+    #                 await channel.send(message.channel, embed=help_7_embed)
     #
     #     # 일상대화 (접두사(콱봇) 없음)
     #     if message.content == "콱봇":
     #         counter("콱봇이 대답합니다.")
-    #         await client.send_message(message.channel, random.choice(["네?", "저 부르셨어요?", "왜요?"]))
+    #         await channel.send(message.channel, random.choice(["네?", "저 부르셨어요?", "왜요?"]))
     #
     #     if message.content == "콱봇 안녕":
     #         counter("콱봇이 인사합니다.")
-    #         await client.send_message(message.channel, "안녕하세요 :D")
+    #         await channel.send(message.channel, "안녕하세요 :D")
     #
     #     if message.content == "콱봇 ㅎㅇ":
     #         counter("콱봇이 인사합니다.")
-    #         await client.send_message(message.channel, "ㅎㅇ염 ㅎㅎ")
+    #         await channel.send(message.channel, "ㅎㅇ염 ㅎㅎ")
     #
     #         # 반응
     #     # if message.content.startswith("ㅋㅋㅋㅋㅋㅋ") or message.content.endswith("ㅋㅋㅋㅋㅋㅋ"):
     #     #     counter("콱봇이 따라 웃습니다.")
-    #     #     await client.send_message(message.channel, "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ")
+    #     #     await channel.send(message.channel, "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ")
     #     #
     #     # if message.content.startswith("??") or message.content.endswith("??"):
     #     #     counter("콱봇이 물음표를 띄웁니다.")
-    #     #     await client.send_message(message.channel, "???")
+    #     #     await channel.send(message.channel, "???")
     #
     #     if message.content == "!!":
     #         counter("..!!!")
-    #         await client.send_message(message.channel, "..!!!")
+    #         await channel.send(message.channel, "..!!!")
     #
     #     if message.content == "ㅇㅋ":
     #         counter("오께이 좋아유~")
-    #         await client.send_message(message.channel, "오께이 좋아유~")
+    #         await channel.send(message.channel, "오께이 좋아유~")
     #
     #     if "ㅠ" in message.content:
     #         counter("ㅠㅠ")
-    #         await client.send_message(message.channel, "ㅠㅠ")
+    #         await channel.send(message.channel, "ㅠㅠ")
     #
     #     if message.content == "엉":
     #         counter("엉? 덩이")
-    #         await client.send_message(message.channel, "덩이")
+    #         await channel.send(message.channel, "덩이")
     #
     #     if "앙" in message.content:
     #         counter("앙기모띠")
-    #         await client.send_message(message.channel, "앙기모띠")
+    #         await channel.send(message.channel, "앙기모띠")
     #
     #     # 대답
     #     if message.content == "잘자":
     #         counter("콱봇이 인사합니다.")
-    #         await client.send_message(message.channel, "안녕히 주무세요~")
+    #         await channel.send(message.channel, "안녕히 주무세요~")
     #
     #     if message.content.endswith("올게"):
     #         counter("콱봇이 인사합니다.")
-    #         await client.send_message(message.channel, "다녀오세요~")
+    #         await channel.send(message.channel, "다녀오세요~")
     #
     #     if message.content.startswith("갔다"):
     #         counter("콱봇이 인사합니다.")
-    #         await client.send_message(message.channel, "다녀오셨어요?")
+    #         await channel.send(message.channel, "다녀오셨어요?")
     #
     #         # 욕 감지
     #     words = ["씨발", "시발", "ㅅㅂ", "좆", "병신", "ㅄ", "ㅂㅅ", "쌍", "썅", "ㅆ", "새끼"]
@@ -973,49 +975,49 @@ async def on_message(message):
     #             except:
     #                 pass
     #             else:
-    #                 await client.send_message(message.channel, "<@%s>님 욕하지 마세요~~^^" % message.author.id)
+    #                 await channel.send(message.channel, "<@%s>님 욕하지 마세요~~^^" % message.author.id)
     #
     #     # 정보 (접두사(콱봇) 있음)
     #         # 인물정보
     #     if message.content == "콱봇 최연욱":
     #         counter("최연욱은 무엇일까")
-    #         await client.send_message(message.channel, random.choice(["바부", "부바", "어부바"]))
+    #         await channel.send(message.channel, random.choice(["바부", "부바", "어부바"]))
     #
     #     if message.content == "콱봇 곽현민":
     #         counter("곽현민?")
-    #         await client.send_message(message.channel, "그게 누구죠;;")
+    #         await channel.send(message.channel, "그게 누구죠;;")
     #
     #     if message.content == "콱봇 안현빈":
     #         counter("안현빈은 무엇일까")
-    #         await client.send_message(message.channel, "아 그 통통하신 분?")
+    #         await channel.send(message.channel, "아 그 통통하신 분?")
     #
     #     if message.content == "콱봇 Tronix" or message.content == "콱봇 tronix" or message.content == "콱봇 트로닉스":
     #         counter("개발자에 대해 출력합니다.")
-    #         await client.send_message(message.channel, "저를 만든 사람이라고 하네요!")
+    #         await channel.send(message.channel, "저를 만든 사람이라고 하네요!")
     #
     #     if message.content == "콱봇 Rio" or message.content == "콱봇 rio" or message.content == "콱봇 리오":
     #         counter("Rio에 대해 출력합니다.")
-    #         await client.send_message(message.channel, "제 친구 기어봇의 개발자입니다!")
+    #         await channel.send(message.channel, "제 친구 기어봇의 개발자입니다!")
     #
     #     if message.content == "콱봇 굴굴이":
     #         counter("굴굴이에 대해 출력합니다.")
-    #         await client.send_message(message.channel, "제 친구 근육돼지의 개발자입니다!")
+    #         await channel.send(message.channel, "제 친구 근육돼지의 개발자입니다!")
     #
     #     if message.content == "콱봇 오리":
     #         counter("Rio에 대해 반대로 출력합니다.")
-    #         await client.send_message(message.channel, "!다니입자발개 의봇킹띵 구친 제")
+    #         await channel.send(message.channel, "!다니입자발개 의봇킹띵 구친 제")
     #
     #     if message.content == "콱봇 기어봇":
     #         counter("기어봇에 대해 출력합니다.")
-    #         await client.send_message(message.channel, "제 친구이자 제 개발자의 친구의 봇입니다!")
+    #         await channel.send(message.channel, "제 친구이자 제 개발자의 친구의 봇입니다!")
     #
     #     # if "지뢰봇" in message.content:
     #     #     counter("지뢰봇에 대해 출력합니다.")
-    #     #     await client.send_message(message.channel, "그 친구는 죽었다구요...ㅠㅠ")
+    #     #     await channel.send(message.channel, "그 친구는 죽었다구요...ㅠㅠ")
     #
     #     if message.content == "콱봇 근육돼지":
     #         counter("근육돼지에 대해 출력합니다.")
-    #         await client.send_message(message.channel, "그 친구는 항상 먹고 있더라고요!")
+    #         await channel.send(message.channel, "그 친구는 항상 먹고 있더라고요!")
     #
     #         # 엔터테인먼트
     #     if message.content == "콱봇 사로" or message.content == "콱봇 saro":
@@ -1029,7 +1031,7 @@ async def on_message(message):
     #         saro4 = "Saro의 곡 중 하나인 **PIEGE**입니다!\n" \
     #                 "https://www.youtube.com/watch?v=mYGYh62Sgpo"
     #         saro = random.choice([saro1, saro2, saro3, saro4])
-    #         await client.send_message(message.channel, saro)
+    #         await channel.send(message.channel, saro)
     #
     #         # 실용적인 기능
     #         # 선택
@@ -1047,7 +1049,7 @@ async def on_message(message):
     #                 description=choose_result,
     #                 color=0xffff00
     #             )
-    #             await client.send_message(message.channel, embed=choose_embed)
+    #             await channel.send(message.channel, embed=choose_embed)
     #
     #         # 번역
     #     if message.content.startswith("콱봇 한영번역"):
@@ -1067,7 +1069,7 @@ async def on_message(message):
     #             description=result["message"]["result"]["translatedText"],
     #             color=0x00ffff
     #         )
-    #         await client.send_message(message.channel, embed=trans_ke_embed)
+    #         await channel.send(message.channel, embed=trans_ke_embed)
     #
     #     if message.content.startswith("콱봇 영한번역"):
     #         counter("영어에서 한국어로 번역합니다.")
@@ -1086,7 +1088,7 @@ async def on_message(message):
     #             description=result["message"]["result"]["translatedText"],
     #             color=0x00ffff
     #         )
-    #         await client.send_message(message.channel, embed=trans_ek_embed)
+    #         await channel.send(message.channel, embed=trans_ek_embed)
     #
     #         # 시간
     #     if message.content == "콱봇 시간":
@@ -1097,7 +1099,7 @@ async def on_message(message):
     #             description="**%d시 %02d분 %02d초**입니다!" % (abs(now.hour - 12), now.minute, now.second),
     #             color=0xffff00
     #         )
-    #         await client.send_message(message.channel, embed=time_embed)
+    #         await channel.send(message.channel, embed=time_embed)
     #
     #     if message.content == "콱봇 날짜":
     #         counter("날짜를 출력합니다.")
@@ -1107,7 +1109,7 @@ async def on_message(message):
     #             description="**%d년 %d월 %d일**입니다!" % (now.year, now.month, now.day),
     #             color=0xffff00
     #         )
-    #         await client.send_message(message.channel, embed=date_embed)
+    #         await channel.send(message.channel, embed=date_embed)
     #
     #     if message.content == "콱봇 시간날짜":
     #         counter("시간과 날짜를 출력합니다.")
@@ -1118,7 +1120,7 @@ async def on_message(message):
     #                         % (now.year, now.month, now.day, abs(now.hour - 12), now.minute, now.second),
     #             color=0xffff00
     #         )
-    #         await client.send_message(message.channel, embed=timedate_embed)
+    #         await channel.send(message.channel, embed=timedate_embed)
     #
     #         # 사이트 이동
     #     if message.content.startswith("콱봇 사이트"):
@@ -1142,35 +1144,35 @@ async def on_message(message):
     #
     #             if site == "네이버" or site == "naver":
     #                 site_embed = createSiteEmbed("네이버", "https://www.naver.com/", "https://media.discordapp.net/attachments/554154900020396033/554291327181783062/mobile_212852414260.png")
-    #                 await client.send_message(message.channel, embed=site_embed)
+    #                 await channel.send(message.channel, embed=site_embed)
     #
     #             if site == "구글" or site == "google":
     #                 site_embed = createSiteEmbed("Google", "https://www.google.com/", "https://media.discordapp.net/attachments/554154900020396033/554301508834033664/AAuE7mAOzJeUhnaCQpCrB8z58jvoroZFpAAB_9nD7ws900-mo-c-c0xffffffff-rj-k-no.png")
-    #                 await client.send_message(message.channel, embed=site_embed)
+    #                 await channel.send(message.channel, embed=site_embed)
     #
     #             if site == "다음" or site == "daum":
     #                 site_embed = createSiteEmbed("다음", "https://www.daum.net/", "https://media.discordapp.net/attachments/554154900020396033/554295052411863050/5587C4E4012FCD0001.png")
-    #                 await client.send_message(message.channel, embed=site_embed)
+    #                 await channel.send(message.channel, embed=site_embed)
     #
     #             if site == "유튜브" or site == "youtube":
     #                 site_embed = createSiteEmbed("YouTube", "https://www.youtube.com/", "https://media.discordapp.net/attachments/554154900020396033/554296606158094366/yt_1200-vfl4C3T0K.png")
-    #                 await client.send_message(message.channel, embed=site_embed)
+    #                 await channel.send(message.channel, embed=site_embed)
     #
     #             if site == "깃허브" or site == "github":
     #                 site_embed = createSiteEmbed("GitHub", "https://www.github.com/", "https://cdn.discordapp.com/attachments/554154900020396033/554319935480922112/9919.png")
-    #                 await client.send_message(message.channel, embed=site_embed)
+    #                 await channel.send(message.channel, embed=site_embed)
     #
     #             if site == "사운드클라우드" or site == "soundcloud":
     #                 site_embed = createSiteEmbed("SoundCloud", "https://soundcloud.com/discover", "https://cdn.discordapp.com/attachments/554154900020396033/554321777866702872/u4Xt7sb8_400x400.png")
-    #                 await client.send_message(message.channel, embed=site_embed)
+    #                 await channel.send(message.channel, embed=site_embed)
     #
     #             if site == "페이스북" or site == "facebook":
     #                 site_embed = createSiteEmbed("Facebook", "https://www.facebook.com", "https://cdn.discordapp.com/attachments/554154900020396033/554322603763040270/fb_icon_325x325.png")
-    #                 await client.send_message(message.channel, embed=site_embed)
+    #                 await channel.send(message.channel, embed=site_embed)
     #
     #             if site == "해시코드" or site == "hashcode":
     #                 site_embed = createSiteEmbed("Hashcode", "https://hashcode.co.kr/", "https://cdn.discordapp.com/attachments/554324092313141268/554325207968645133/ic_meta-d75a4fdc9eacdac15ab7d016ee69babf6aff049b1fc80a55f86dad5560da2cee.png")
-    #                 await client.send_message(message.channel, embed=site_embed)
+    #                 await channel.send(message.channel, embed=site_embed)
     #
     #     if message.content == "콱봇 사이트 목록":
     #         counter("이동할 수 있는 사이트들의 목록을 출력합니다.")
@@ -1186,14 +1188,14 @@ async def on_message(message):
     #             "해시코드 hashcode",
     #             color=0xffffff
     #         )
-    #         await client.send_message(message.channel, embed=site_list_embed)
+    #         await channel.send(message.channel, embed=site_list_embed)
     #
     #         # 콱봇과 놀기
     #         # 가위바위보
     #     if message.content.startswith("콱봇 가위바위보"):
     #         counter("콱봇과 가위바위보를 합니다.")
     #
-    #         await client.send_message(message.channel, "가위바위보 중에 고르세요!")
+    #         await channel.send(message.channel, "가위바위보 중에 고르세요!")
     #         gbb_user = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
     #
     #         if gbb_user is None:
@@ -1202,7 +1204,7 @@ async def on_message(message):
     #                 description="왜 안 고르세요? :(",
     #                 color=0xff0000
     #             )
-    #             await client.send_message(message.channel, embed=gbb_timeover_embed)
+    #             await channel.send(message.channel, embed=gbb_timeover_embed)
     #
     #         else:
     #             gbb_user = gbb_user.content
@@ -1223,7 +1225,7 @@ async def on_message(message):
     #                 description=gbb,
     #                 color=0xffff00
     #             )
-    #             await client.send_message(message.channel, embed=gbb_embed)
+    #             await channel.send(message.channel, embed=gbb_embed)
     #
     #         # 하나빼기
     #     if message.content.startswith("콱봇 하나빼기"):
@@ -1231,7 +1233,7 @@ async def on_message(message):
     #
     #         while True:
     #
-    #             await client.send_message(message.channel, "일단 먼저 가위바위보 중에 2개를 골라주세요! (공백 구분)")
+    #             await channel.send(message.channel, "일단 먼저 가위바위보 중에 2개를 골라주세요! (공백 구분)")
     #             hnp_user_input = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
     #
     #             if hnp_user_input is None:
@@ -1240,7 +1242,7 @@ async def on_message(message):
     #                     description="왜 안 고르세요? :(",
     #                     color=0xff0000
     #                 )
-    #                 client.send_message(message.channel, embed=hnp_timeover_embed_middle)
+    #                 channel.send(message.channel, embed=hnp_timeover_embed_middle)
     #
     #             else:
     #                 hnp_user_input = hnp_user_input.content.split()
@@ -1253,7 +1255,7 @@ async def on_message(message):
     #                         description="<@%s>님이 진 걸로 ㅎㅎ" % message.author.id,
     #                         color=0xff0000
     #                     )
-    #                     await client.send_message(message.channel, embed=hnp_error_embed)
+    #                     await channel.send(message.channel, embed=hnp_error_embed)
     #                     break
     #                 hnp_list = ["가위", "바위", "보"]
     #                 hnp_com1, hnp_com2 = 0, 0
@@ -1264,7 +1266,7 @@ async def on_message(message):
     #                     title="%s와 %s 중에 무엇을 내시겠어요?" % (hnp_user1, hnp_user2),
     #                     description="콱봇 : %s  %s\n당신 : %s  %s" % (hnp_com1, hnp_com2, hnp_user1, hnp_user2)
     #                 )
-    #                 await client.send_message(message.channel, embed=hnp_embed_middle)
+    #                 await channel.send(message.channel, embed=hnp_embed_middle)
     #
     #                 hnp_user = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
     #
@@ -1274,7 +1276,7 @@ async def on_message(message):
     #                         description="왜 안 고르세요? :(",
     #                         color=0xff0000
     #                     )
-    #                     await client.send_message(message.channel, embed=hnp_timeover_embed)
+    #                     await channel.send(message.channel, embed=hnp_timeover_embed)
     #                     break
     #                 else:
     #                     hnp_user = hnp_user.content
@@ -1294,7 +1296,7 @@ async def on_message(message):
     #                         description=hnp,
     #                         color=0xffff00
     #                     )
-    #                     await client.send_message(message.channel, embed=hnp_embed)
+    #                     await channel.send(message.channel, embed=hnp_embed)
     #                     break
     #
     #     #     # 묵찌빠
@@ -1304,7 +1306,7 @@ async def on_message(message):
     #     #
     #     #
     #     #     while True:
-    #     #         await client.send_message(message.channel, "묵찌빠 중 하나를 골라주세요!")
+    #     #         await channel.send(message.channel, "묵찌빠 중 하나를 골라주세요!")
     #     #         mjb_user = await client.wait_for_message(timeout=5, author=message.author, channel=message.channel)
     #     #
     #     #         if mjb_user is None:
@@ -1313,7 +1315,7 @@ async def on_message(message):
     #     #                 description="왜 안 고르세요? :(",
     #     #                 color=0xff0000
     #     #             )
-    #     #             client.send_message(message.channel, embed=mjb_timeover_embed)
+    #     #             channel.send(message.channel, embed=mjb_timeover_embed)
     #     #
     #     #         else:
     #     #             mjb_attack, mjb_user_, mjb_count, mjb_attack, mjb = 0, 0, 0, 0, 0
@@ -1332,7 +1334,7 @@ async def on_message(message):
     #     #                 title=whattosay(mjb_count, mjb_user_, mjb_user) + " 무엇을 내시겠어요?",
     #     #                 description="컴퓨터 : %s\n당신    : %s" % (mjb_com, mjb_user)
     #     #             )
-    #     #             await client.send_message(message.channel, embed=mjb_middle_embed)
+    #     #             await channel.send(message.channel, embed=mjb_middle_embed)
     #     #
     #     #             # 같은 것을 냈을 때
     #     #             if mjb_user == mjb_com:
@@ -1360,7 +1362,7 @@ async def on_message(message):
     #     #     mjb_embed = discord.Embed(
     #     #         title=mjb
     #     #     )
-    #     #     await client.send_message(message.channel, embed=mjb_embed)
+    #     #     await channel.send(message.channel, embed=mjb_embed)
     #
     #     #     # UP AND DOWN
     #     # if message.content == "콱봇 업앤다운":
@@ -1372,7 +1374,7 @@ async def on_message(message):
     #     #     ud_count = 0
     #     #     ud_error = 0
     #     #
-    #     #     await client.send_message(message.channel, "컴퓨터가 선택하는 1부터 100까지의 숫자를 맞춰보세요!")
+    #     #     await channel.send(message.channel, "컴퓨터가 선택하는 1부터 100까지의 숫자를 맞춰보세요!")
     #     #
     #     #     while ud_com != ud_user:
     #     #         ud_count += 1
@@ -1385,7 +1387,7 @@ async def on_message(message):
     #     #                 description="게임 끝!",
     #     #                 color=0xff0000
     #     #             )
-    #     #             await client.send_message(message.channel, embed=ud_timeover_embed)
+    #     #             await channel.send(message.channel, embed=ud_timeover_embed)
     #     #             break
     #     #
     #     #         try:
@@ -1397,7 +1399,7 @@ async def on_message(message):
     #     #                 description="게임 끝!",
     #     #                 color=0xff0000
     #     #             )
-    #     #             await client.send_message(message.channel, embed=ud_error_embed)
+    #     #             await channel.send(message.channel, embed=ud_error_embed)
     #     #             break
     #     #         else:
     #     #             if ud_user not in range(1, 101):
@@ -1407,7 +1409,7 @@ async def on_message(message):
     #     #                     description="게임 끝!",
     #     #                     color=0xff0000
     #     #                 )
-    #     #                 await client.send_message(message.channel, embed=ud_error_embed)
+    #     #                 await channel.send(message.channel, embed=ud_error_embed)
     #     #                 break
     #     #
     #     #
@@ -1417,26 +1419,26 @@ async def on_message(message):
     #     #                     title="UP!",
     #     #                     description="시도 횟수: %d" % ud_count
     #     #                 )
-    #     #                 await client.send_message(message.channel, embed=ud_count_embed)
+    #     #                 await channel.send(message.channel, embed=ud_count_embed)
     #     #             if ud_user < ud_com:
     #     #                 ud_count_embed = discord.Embed(
     #     #                     title="DOWN!",
     #     #                     description="시도 횟수: %d" % ud_count
     #     #                 )
-    #     #                 await client.send_message(message.channel, embed=ud_count_embed)
+    #     #                 await channel.send(message.channel, embed=ud_count_embed)
     #     #
     #     #         if ud_error == 0:
     #     #             ud_result_embed = discord.Embed(
     #     #                 title="게임이 끝났습니다!",
     #     #                 description="총 시도 횟수: %d" % ud_count
     #     #             )
-    #     #             await client.send_message(message.channel, embed=ud_result_embed)
+    #     #             await channel.send(message.channel, embed=ud_result_embed)
 
         # 기타
     if message.content == "콱봇 프사":
         counter("프로필 사진을 출력합니다.")
         bot_picture = "https://cdn.discordapp.com/attachments/547642671460515841/550260106751639554/awesome_face.png"
-        await client.send_message(message.channel, "제 사진이에요!\n%s" % bot_picture)
+        await channel.send(message.channel, "제 사진이에요!\n%s" % bot_picture)
 
 
 client.run(token)
