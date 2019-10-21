@@ -1,4 +1,4 @@
-#!/Users/tronix/Dropbox/Develop/Python/Discord/venv/bin/python
+#!/Users/tronix/Dropbox/Develop/Python/KwakBot/venv/bin/python
 
 import sys
 import getopt
