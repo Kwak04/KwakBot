@@ -43,6 +43,10 @@ async def on_message(message):
         count += 1
         print(count, message.content, " // %s" % description)
 
+
+    def pred(m):
+        return m.author == message.author and m.channel == message.channel
+
     # 도움말
     help_keyword = ["콱봇 도와줘", "콱봇 도움말", "콱봇 도움", "콱봇 help"]
     if message.content in help_keyword:
@@ -75,21 +79,22 @@ async def on_message(message):
         await channel.send(embed=help_embed)
 
         help_msg = await channel.send("▼")
-        await client.add_reaction(help_msg, "🎬")
-        await client.add_reaction(help_msg, "🎰")
-        await client.add_reaction(help_msg, "📔")
-        await client.add_reaction(help_msg, "⏰")
-        await client.add_reaction(help_msg, "🔎")
-        await client.add_reaction(help_msg, "🎮")
-        await client.add_reaction(help_msg, "⚙")
+        await help_msg.add_reaction("🎬")
+        await help_msg.add_reaction("🎰")
+        await help_msg.add_reaction("📔")
+        await help_msg.add_reaction("⏰")
+        await help_msg.add_reaction("🔎")
+        await help_msg.add_reaction("🎮")
+        await help_msg.add_reaction("⚙")
 
         def check(reaction, user):
             e = str(reaction.emoji)
             return e.startswith(("🎬", "🎰", "📔", "⏰", "🔎", "🎮", "⚙"))
 
         while True:
-            res = await client.wait_for_reaction(message=help_msg, check=check, user=message.author)
-
+            # res = await channel.wait_for_reaction(message=help_msg, check=check, user=message.author)
+            res = await client.wait_for('reaction_add', check=check)
+            reaction, user = await client.wait_for('reaction_add', check=lambda r, u: u.id == 176995180300206080)
             if "{0.reaction.emoji}".format(res) == "🎬":
                 counter("엔터테인먼트 관련 도움말을 출력합니다.")
 
