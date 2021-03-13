@@ -1,7 +1,3 @@
-# client id : 547685961136603149
-# token : NTQ3Njg1OTYxMTM2NjAzMTQ5.D06bTA.rqxzMYB8ErcwoMuwE1CP7THQ7kQ
-# client secret : 63U9h5F9bVNXGkHXwk2LJCVCfioX6t1Y
-# 봇 추가 url : https://discordapp.com/login?redirect_to=%2Foauth2%2Fauthorize%3Fclient_id%3D547685961136603149%26scope%3Dbot
 # 노랑 : 0xffff00  청록 : 0x00ffff
 
 import asyncio
@@ -14,8 +10,10 @@ from datetime import datetime
 
 # 준비
 client = discord.Client()
-token = "NTQ3Njg1OTYxMTM2NjAzMTQ5.D06bTA.rqxzMYB8ErcwoMuwE1CP7THQ7kQ"
 count = 0
+with open('secrets.json') as secrets_file:
+    secrets = json.load(secrets_file)
+token = secrets["token"]
 
 
 # 로그인
