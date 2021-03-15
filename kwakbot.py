@@ -1,10 +1,6 @@
 import discord
 import json
 
-from discord import colour
-from discord import embeds
-from discord import channel
-
 
 # Load token from secrets.json
 with open('secrets.json') as secrets_file:
