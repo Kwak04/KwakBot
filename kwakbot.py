@@ -27,17 +27,18 @@ class MyClient(discord.Client):
         if message.author == client.user: return
 
         # Swear words detector
-        swear_words = ["씨발", "싸발", "ㅅㅂ", "좆", "ㅈ같네", "병신", "ㅂㅅ", "ㅄ", "쌍", "썅", "ㅆ", "새끼"]
+        swear_words = ["씨발", "싸발", "ㅅㅂ", "시발", "좆", "ㅈ같네", "병신", "ㅂㅅ", "ㅄ", "쌍", "썅", "ㅆ", "새끼"]
         for word in swear_words:
             if word in message_content:
                 try: await message.delete()
                 except: print("<Unable to delete message>")
                 else:
-                    swear_detector_detects = "<@{0.author.id}>님 욕하지 마세요~~^^"
+                    swear_detector_message = """<@{0.author.id}>님 욕하지 마세요~~^^
+                    삭제된 메시지: ||{0.content}||"""
 
                     swear_detector_embed = discord.Embed(
                             title='욕설이 감지되었습니다.',
-                            description=swear_detector_detects.format(message),
+                            description=swear_detector_message.format(message),
                             colour=0xff0000)
 
                     await channel.send(embed=swear_detector_embed)
