@@ -2,4 +2,7 @@
 venv/
 .DS_Store
 
+*.swp
+
 secrets.json
+settings.json
